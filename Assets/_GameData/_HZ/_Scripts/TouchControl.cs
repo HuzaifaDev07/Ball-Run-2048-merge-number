@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class TouchControl : MonoBehaviour
@@ -14,4 +15,6 @@ public class TouchControl : MonoBehaviour
             transform.Translate(new Vector3(movement, 0, 0));
         }
     }
+
+
 }

@@ -1,0 +1,79 @@
+{
+    "name": "New Controls",
+    "maps": [
+        {
+            "name": "HorizontalDrag",
+            "id": "cfe804ea-c0dc-47c0-8c6b-273cc42834f8",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "8fd56a0a-5e83-482f-b536-871987526193",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "879b1886-f472-46c6-a3a0-e671592a1068",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Drag",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "01f50b7f-f53b-4978-9231-88c142082b3f",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e66fdcd8-ca3b-4200-868e-73125ce06db2",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Drag",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "183461c2-314c-4f57-9b12-4f1bb671c4cb",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Drag",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Drag",
+            "bindingGroup": "Drag",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
