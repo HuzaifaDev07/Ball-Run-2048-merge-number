@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using Dreamteck.Splines;
 using DG.Tweening;
 
 namespace Hz.PlayerController
@@ -9,12 +8,12 @@ namespace Hz.PlayerController
     {
         public TextMeshPro _ScoreText;
         public Rigidbody _Rb;
-        public SplineFollower SplineFollower;
+        //public SplineFollower SplineFollower;
         [SerializeField] Renderer _MeshRenderer;
 
         [SerializeField] float HorizontalSpeed;
         [SerializeField] float movement;
-        [SerializeField] bool MoveNow;
+        public bool MoveNow;
         public MaterialPropertyBlock _MyMpb;
         [SerializeField] DOTweenAnimation ScaleChanger;
         private void Start()
@@ -30,18 +29,27 @@ namespace Hz.PlayerController
             {
                 // Move the player horizontally based on mouse movement
                 movement = Input.GetAxis("Horizontal") * HorizontalSpeed * Time.fixedDeltaTime;
+                
                 transform.Translate(new Vector3(movement, 0, 0));
+            }
+            else
+            {
+                movement = transform.position.x;
             }
         }
 
         public void MovementCheck(bool check)
         {
+            //if (!check)
+            //    transform.position = new Vector3(movement, 0, 0);
             MoveNow = check;
+
+
         }
 
         public void DisableSplineY(bool check)
         {
-            SplineFollower.motion.applyPositionY = check;
+            //SplineFollower.motion.applyPositionY = check;
             if (check)
             {
                 _Rb.constraints = RigidbodyConstraints.FreezePositionY;
@@ -58,15 +66,15 @@ namespace Hz.PlayerController
         {
             if (Check)
             {
-                SplineFollower.motion.applyPositionX = true;
-                SplineFollower.motion.applyPositionY = true;
-                SplineFollower.motion.applyPositionZ = true;
+                //SplineFollower.motion.applyPositionX = true;
+                //SplineFollower.motion.applyPositionY = true;
+                //SplineFollower.motion.applyPositionZ = true;
             }
             else
             {
-                SplineFollower.motion.applyPositionX = false;
-                SplineFollower.motion.applyPositionY = false;
-                SplineFollower.motion.applyPositionZ = false;
+                //SplineFollower.motion.applyPositionX = false;
+                //SplineFollower.motion.applyPositionY = false;
+                //SplineFollower.motion.applyPositionZ = false;
             }
         }
         public void ControlBySplinePosX(bool Check)
@@ -74,14 +82,14 @@ namespace Hz.PlayerController
             if (Check)
             {
                 transform.rotation = Quaternion.Euler(0, -90, 0);
-                SplineFollower.motion.applyPositionX = true;
-                SplineFollower.motion.applyPositionZ = false;
+                //SplineFollower.motion.applyPositionX = true;
+                //SplineFollower.motion.applyPositionZ = false;
             }
             else
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                SplineFollower.motion.applyPositionX = false;
-                SplineFollower.motion.applyPositionZ = true;
+                //SplineFollower.motion.applyPositionX = false;
+                //SplineFollower.motion.applyPositionZ = true;
             }
         }
     }

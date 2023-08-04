@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Hz.PlayerController;
-using Dreamteck.Splines;
+//using Dreamteck.Splines;
 
 namespace Hz.Gameplay
 {
