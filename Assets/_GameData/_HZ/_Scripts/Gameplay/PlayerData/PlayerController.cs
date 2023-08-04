@@ -11,17 +11,17 @@ namespace Hz.PlayerController
         public Rigidbody _Rb;
         public SplineFollower SplineFollower;
         [SerializeField] Renderer _MeshRenderer;
-        [SerializeField] Color _Color;
+
         [SerializeField] float HorizontalSpeed;
         [SerializeField] float movement;
         [SerializeField] bool MoveNow;
+        public MaterialPropertyBlock _MyMpb;
         [SerializeField] DOTweenAnimation ScaleChanger;
         private void Start()
         {
             //MeshRenderer
             MaterialPropertyBlock Mpb = new();
             _MeshRenderer.SetPropertyBlock(Mpb);
-            Mpb.SetColor(0, _Color);
             _MeshRenderer.SetPropertyBlock(Mpb);
         }
         public void Update()
@@ -52,6 +52,37 @@ namespace Hz.PlayerController
                 _Rb.constraints = RigidbodyConstraints.FreezeRotation;
             }
 
+        }
+
+        public void ControlBySplinePos(bool Check)
+        {
+            if (Check)
+            {
+                SplineFollower.motion.applyPositionX = true;
+                SplineFollower.motion.applyPositionY = true;
+                SplineFollower.motion.applyPositionZ = true;
+            }
+            else
+            {
+                SplineFollower.motion.applyPositionX = false;
+                SplineFollower.motion.applyPositionY = false;
+                SplineFollower.motion.applyPositionZ = false;
+            }
+        }
+        public void ControlBySplinePosX(bool Check)
+        {
+            if (Check)
+            {
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+                SplineFollower.motion.applyPositionX = true;
+                SplineFollower.motion.applyPositionZ = false;
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                SplineFollower.motion.applyPositionX = false;
+                SplineFollower.motion.applyPositionZ = true;
+            }
         }
     }
 }
