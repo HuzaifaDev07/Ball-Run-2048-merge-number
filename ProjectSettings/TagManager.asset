@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - EnemyLine
   - Ball
+  - PowerUp
   layers:
   - Default
   - TransparentFX

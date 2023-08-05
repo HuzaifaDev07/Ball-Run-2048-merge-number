@@ -18,7 +18,7 @@ public class FollowPath : MonoBehaviour
     void Awake()
     {
         //path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCreator>();        //Initializes path
-        distanceTravelled = Random.Range(0f, path.path.length);        //Player starts at a random position
+        distanceTravelled = 0;        //Player starts at a random position
         Move();     //Makes the player follow the path
     }
 
