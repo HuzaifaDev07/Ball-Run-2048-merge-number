@@ -9,9 +9,9 @@ namespace Hz.Gameplay
     public class GameManager : MonoBehaviour
     {
         #region ======= PlayerData ======
-       
+
         #endregion
-       
+
     }
 }
 

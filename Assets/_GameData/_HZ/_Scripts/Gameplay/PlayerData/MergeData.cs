@@ -48,11 +48,12 @@ public class MergeData : MonoBehaviour
     [SerializeField] MaterialPropertyBlock Mpb;
     [SerializeField] GameObject[] EnjectedBalls;
     [SerializeField] Color[] EnjectedBallsColors;
+  
 
     public Rigidbody MyRgd;
     public TrailRenderer MyTrailRenderer;
 
-    
+
 
 
     private void Start()
@@ -123,7 +124,11 @@ public class MergeData : MonoBehaviour
         transform.DOScale(new Vector3(IncreaseIndex[RefMergeData.BallIndex] + .1f,
                                           IncreaseIndex[RefMergeData.BallIndex] + .1f,
                                               IncreaseIndex[RefMergeData.BallIndex] + .1f), .2f);
-        Destroy(RefMergeData.gameObject);
+        if (RefMergeData != null)
+        {
+            Destroy(RefMergeData.gameObject);
+        }
+
         RefMergeData = null;
     }
 

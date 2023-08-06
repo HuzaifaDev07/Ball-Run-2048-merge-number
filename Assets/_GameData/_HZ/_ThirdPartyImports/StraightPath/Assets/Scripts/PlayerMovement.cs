@@ -25,7 +25,7 @@ namespace Hz.PlayerMove
         [HideInInspector] public bool Booster = false;
         [HideInInspector] public bool Magnet = false;
         [HideInInspector] public bool SuperPower = false;
-         public FollowPath FollowPath;
+        public FollowPath FollowPath;
         #region Dotweens 
         [Header("******** tweens Assets ********")]
         public DOTweenAnimation MyScaleTween;
@@ -57,6 +57,7 @@ namespace Hz.PlayerMove
                     if (touching == false)
                     {
                         touching = true;
+                        positionY = transform.localPosition.y;
                         initTouch = touch;
                     }
 
@@ -100,6 +101,7 @@ namespace Hz.PlayerMove
 
                             // Move the objects towards the player using DOTween
                             MD.gameObject.transform.DOMove(targetPos, duration);
+                            break;
                         }
                     }
                 }
@@ -118,6 +120,7 @@ namespace Hz.PlayerMove
             else
             {
                 rb.isKinematic = false;
+                MyParent.transform.position = new Vector3(MyParent.transform.position.x, 0, MyParent.transform.position.z);
                 WingsTween.StopPlay();
             }
         }
@@ -153,6 +156,4 @@ namespace Hz.PlayerMove
         }
 
     }
-
-
 }
