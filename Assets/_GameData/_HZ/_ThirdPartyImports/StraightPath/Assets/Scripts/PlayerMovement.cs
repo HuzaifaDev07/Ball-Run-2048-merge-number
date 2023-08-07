@@ -21,6 +21,7 @@ namespace Hz.PlayerMove
         public GameObject MyParent;
         public Rigidbody rb;
         private MergeData mergeData;
+       
         Ray hit;
         [HideInInspector] public bool Booster = false;
         [HideInInspector] public bool Magnet = false;
@@ -50,6 +51,7 @@ namespace Hz.PlayerMove
 
         void Update()
         {
+            positionY = transform.localPosition.y;
             foreach (Touch touch in Input.touches)
             {
                 if (touch.phase == TouchPhase.Began)        //if finger touches the screen
@@ -146,6 +148,14 @@ namespace Hz.PlayerMove
             if (other.CompareTag("PowerUp"))
             {
                 other.GetComponent<PowerUp>().PowerCheck();
+            }
+            if (other.CompareTag("Finish"))
+            {
+                Gameplay.GameManager.instance.StageClear();
+            }
+            if (other.CompareTag("Failed"))
+            {
+                Gameplay.GameManager.instance.StageFailed();
             }
         }
 

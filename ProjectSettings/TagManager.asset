@@ -12,6 +12,7 @@ TagManager:
   - EnemyLine
   - Ball
   - PowerUp
+  - Failed
   layers:
   - Default
   - TransparentFX

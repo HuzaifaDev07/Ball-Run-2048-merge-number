@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Hz.PlayerMove;
+using Hz.Gameplay;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,6 +8,30 @@ using UnityEngine;
 
 public class MergeData : MonoBehaviour
 {
+    private void OnValidate()
+    {
+        CheckRigidBody();
+    }
+
+    public void CheckRigidBody()
+    {
+        if (MyRgd == null)
+        {
+            Rigidbody rbd = this.gameObject.AddComponent<Rigidbody>();
+            rbd.mass = 0.1f;
+            MyRgd = rbd;
+        }
+        else
+        {
+            Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
+            MyRgd = rb;
+        }
+
+        if (this.gameObject.GetComponent<SphereCollider>() == null)
+        {
+            this.gameObject.AddComponent<SphereCollider>();
+        }
+    }
     public enum PlayerRankStages
     {
         Rank1,
@@ -44,50 +69,46 @@ public class MergeData : MonoBehaviour
     [SerializeField] int _2xNumholder = 2;
     [SerializeField] int Ball2xNum;
     [SerializeField] TextMeshPro TextDisplayer;
-    [SerializeField] MeshRenderer objectRenderer;
+    [SerializeField] AudioSource MyAudioSource;
+    [SerializeField] AudioClip NotMergeSound;
+    [SerializeField] AudioClip MergeSound;
+    [SerializeField] MeshFilter MeshFilter;
     [SerializeField] MaterialPropertyBlock Mpb;
     [SerializeField] GameObject[] EnjectedBalls;
+    [SerializeField] Mesh[] BallMeshes;
     [SerializeField] Color[] EnjectedBallsColors;
-  
+
 
     public Rigidbody MyRgd;
     public TrailRenderer MyTrailRenderer;
 
-
-
-
-    private void Start()
+    public void IsMergeable(MergeData playerRankState)
     {
-        Mpb = new MaterialPropertyBlock();
-    }
-    public bool IsMergeable(MergeData playerRankState)
-    {
+        Debug.Log($"{playerRankState.gameObject.name} : Player_Name");
+        Debug.Log($"{playerRankState.BallIndex} : Player");
         if (playerRankState != null)
         {
-            if (_PlayerRankStages == playerRankState._PlayerRankStages && RefMergeData.BallIndex == BallIndex)
+            if (BallIndex == RefMergeData.BallIndex)
             {
                 Mergeable = true;
+                BallIndex++;
                 Debug.Log($"{_PlayerType} : PlayerType");
-                //if (_PlayerType == PlayerType.PlayerBall)
-                //{
+                MyAudioSource.clip = MergeSound;
+                MyAudioSource.Play();
                 Debug.Log("CallTween");
-                RefMergeData.objectRenderer.enabled = false;
                 MyColor = RefMergeData.MyColor;
-                objectRenderer.material.color = MyColor;
                 StartCoroutine(WaitforScaleAnimation());
-                TextDisplayer.text = RefMergeData.Ball2xNum.ToString();
-                objectRenderer.GetPropertyBlock(Mpb);
                 if (_PlayerType == PlayerType.PlayerBall)
                 {
                     MyTrailRenderer.startColor = MyColor;
                 }
-                _2xNumholder = _2xNumholder * 2;
-                Mpb.SetColor("_Color", MyColor);
-
-                objectRenderer.SetPropertyBlock(Mpb);
-                BallIndex++;
-                //}
-                return Mergeable;
+                _PlayerRankStages = playerRankState._PlayerRankStages;
+                if (BallIndex < BallMeshes.Length)
+                {
+                    MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y + 0.1f, MeshFilter.gameObject.transform.position.z);
+                    MeshFilter.mesh = BallMeshes[BallIndex];
+                }
+                return;
             }
             else
             {
@@ -96,7 +117,9 @@ public class MergeData : MonoBehaviour
                     RefMergeData.MyRgd.AddForce(Vector3.back * 50f);
                 }
                 Mergeable = false;
-                return Mergeable;
+                MyAudioSource.clip = NotMergeSound;
+                MyAudioSource.Play();
+                return;
             }
         }
         else
@@ -105,25 +128,41 @@ public class MergeData : MonoBehaviour
             {
                 RefMergeData.MyRgd.AddForce(Vector3.back * 50f);
             }
+            MyAudioSource.clip = NotMergeSound;
+            MyAudioSource.Play();
             NotMerge = true;
             Mergeable = false;
-            return Mergeable;
+            return;
         }
     }
     IEnumerator WaitforScaleAnimation()
     {
-        transform.DOScale(new Vector3(IncreaseIndex[RefMergeData.BallIndex] + .9f,
-                                          IncreaseIndex[RefMergeData.BallIndex] + .9f,
-                                             IncreaseIndex[RefMergeData.BallIndex] + .9f), .3f);
-        yield return new WaitForSeconds(0.2f);
+        transform.DOScale(new Vector3(IncreaseIndex[RefMergeData.BallIndex] + .4f,
+                                          IncreaseIndex[RefMergeData.BallIndex] + .4f,
+                                             IncreaseIndex[RefMergeData.BallIndex] + .4f), .3f);
+        yield return new WaitForSeconds(0.1f);
         ChangeScale();
+    }
+    IEnumerator ReduceScaleAnimation()
+    {
+        if (RefMergeData != null)
+        {
+            transform.DOScale(new Vector3(IncreaseIndex[RefMergeData.BallIndex] - .8f,
+                                              IncreaseIndex[RefMergeData.BallIndex] - .8f,
+                                                 IncreaseIndex[RefMergeData.BallIndex] - .8f), .1f);
+
+        }
+        yield return new WaitForSeconds(0.2f);
+        ReduceScale();
+    }
+    public void ReduceScale()
+    {
+        transform.DOScale(Vector3.one, .1f);
     }
     public void ChangeScale()
     {
 
-        transform.DOScale(new Vector3(IncreaseIndex[RefMergeData.BallIndex] + .1f,
-                                          IncreaseIndex[RefMergeData.BallIndex] + .1f,
-                                              IncreaseIndex[RefMergeData.BallIndex] + .1f), .2f);
+        transform.DOScale(Vector3.one, .2f);
         if (RefMergeData != null)
         {
             Destroy(RefMergeData.gameObject);
@@ -141,32 +180,69 @@ public class MergeData : MonoBehaviour
 
             IsMergeable(RefMergeData);
         }
-        if (collision.gameObject.CompareTag(ObstacleTag))
+    }
+    bool ObstacleTriggered;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(ObstacleTag))
         {
-            if (BallIndex != 0 && _PlayerType == PlayerType.PlayerBall)
+            if (BallIndex != 0)
             {
-                Instantiate(EnjectedBalls[BallIndex - 1], new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
-                MyColor = EnjectedBallsColors[BallIndex - 1];
-                objectRenderer.material.color = MyColor;
-                objectRenderer.GetPropertyBlock(Mpb);
-                Mpb.SetColor("_Color", MyColor);
-                _2xNumholder = _2xNumholder / 2;
-                TextDisplayer.text = _2xNumholder.ToString();
-                objectRenderer.SetPropertyBlock(Mpb);
-                MyTrailRenderer.startColor = MyColor;
+                switch (_PlayerType)
+                {
+                    case PlayerType.PlayerBall:
+                        //  ObstacleTriggered = true;
+                        other.GetComponent<Collider>().enabled = false;
+                        MyAudioSource.clip = NotMergeSound;
+                        MyAudioSource.Play();
+                        Debug.Log($"{other.name}");
+                        Instantiate(EnjectedBalls[BallIndex - 1], new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
+                        MyColor = EnjectedBallsColors[BallIndex - 1];
+                        MyTrailRenderer.startColor = MyColor;
+                        MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y - 0.1f, MeshFilter.gameObject.transform.position.z);
+                        BallIndex--;
+                        MeshFilter.mesh = BallMeshes[BallIndex];
+                        StartCoroutine(ReduceScaleAnimation());
+                        break;
+                    default:
+                        break;
+                }
 
-                BallIndex--;
                 return;
             }
-            else
+            else if (BallIndex == 0 && _PlayerType == PlayerType.PlayerBall)
             {
                 Time.timeScale = 0;
             }
+            else if (_PlayerType == PlayerType.OtherBalls)
+            {
+                MyRgd.AddForce(Vector3.up * 1075f);
+            }
         }
-
-
     }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag(ObstacleTag))
+    //    {
+    //        switch (_PlayerType)
+    //        {
+    //            case PlayerType.PlayerBall:
+    //                ObstacleTriggered = true;
+    //                break;
+    //        }
+    //    }
+    //}
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag(ObstacleTag))
+    //    {
+    //        switch (_PlayerType)
+    //        {
+    //            case PlayerType.PlayerBall:
+    //                ObstacleTriggered = false;
+    //                break;
+    //        }
 
-
-
+    //    }
+    //}
 }
