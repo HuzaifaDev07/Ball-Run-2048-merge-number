@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 184838933396653865}
   - component: {fileID: 248461754646544103}
   - component: {fileID: -2558984861893551060}
+  - component: {fileID: -1041272640382092316}
   m_Layer: 0
   m_Name: Ball0
   m_TagString: Player
@@ -482,6 +483,7 @@ MonoBehaviour:
   MyColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0}
   RankIndex: 0
   NotMerge: 0
+  MyCollider: {fileID: -1041272640382092316}
   RefMergeData: {fileID: 0}
   PlayerMovement: {fileID: 184838933396653865}
   MergeBallTag: Ball
@@ -501,7 +503,10 @@ MonoBehaviour:
   _2xNumholder: 2
   Ball2xNum: 0
   TextDisplayer: {fileID: 184838934013918005}
-  MeshFilter: {fileID: 184838932143995315}
+  MyAudioSource: {fileID: 0}
+  NotMergeSound: {fileID: 0}
+  MergeSound: {fileID: 0}
+  MeshFilter: {fileID: 0}
   EnjectedBalls:
   - {fileID: 5062130991581354203, guid: a6859835b610d8e4d80bc8ef36eb3425, type: 3}
   - {fileID: 8674051194864655960, guid: dd6db1e871735754db9055088a5ae348, type: 3}
@@ -529,6 +534,7 @@ MonoBehaviour:
   - {r: 0.7254902, g: 0.9960785, b: 0.30588236, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
+  MergeParticle: {fileID: 0}
   MyRgd: {fileID: 184838933396653860}
   MyTrailRenderer: {fileID: 8564792220208312720}
 --- !u!114 &-2558984861893551060
@@ -543,6 +549,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830fee30cc0cd0a47b49b65271bb8d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &-1041272640382092316
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185825486175083073}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &8615221235315023729
 GameObject:
   m_ObjectHideFlags: 0
