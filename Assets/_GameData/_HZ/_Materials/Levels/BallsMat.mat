@@ -24,9 +24,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: ee7e4c9a5f6364b688a332c67fc32cca, type: 3}
   m_ValidKeywords:
   - _ALPHATEST_ON
-  - _CLEARCOATMAP
+  - _CLEARCOAT
   - _EMISSION
-  - _OCCLUSIONMAP
   - _SPECULAR_SETUP
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -56,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: dad5f922bb4f17843b3d0cbde0ca0143, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5ec38536866a7e64fb9f01a5f9b385ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -64,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ClearCoatMap:
-        m_Texture: {fileID: 2800000, guid: dad5f922bb4f17843b3d0cbde0ca0143, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -88,7 +87,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: dad5f922bb4f17843b3d0cbde0ca0143, type: 3}
+        m_Texture: {fileID: 2800000, guid: d28cfd535988bc74db2c19343797d89c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _METALNESS_MAP:
@@ -96,7 +95,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: dad5f922bb4f17843b3d0cbde0ca0143, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5ec38536866a7e64fb9f01a5f9b385ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -108,7 +107,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: dad5f922bb4f17843b3d0cbde0ca0143, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -195,7 +194,7 @@ Material:
     - _SPECULAR_ROUGHNESS: 0
     - _SampleGI: 0
     - _Shininess: 0
-    - _Smoothness: 0.71
+    - _Smoothness: 0.775
     - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
@@ -226,12 +225,12 @@ Material:
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+    - _EmissionColor: {r: 2.297397, g: 2.297397, b: 2.297397, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _SPECULAR_COLOR: {r: 1, g: 1, b: 1, a: 0}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecColor: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0.5}
+    - _SpecColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 0.5}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _UvOffset: {r: 0, g: 0, b: 0, a: 0}
     - _UvTiling: {r: 1, g: 1, b: 0, a: 0}
