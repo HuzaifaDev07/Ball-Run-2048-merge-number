@@ -15,23 +15,23 @@ public class MergeData : MonoBehaviour
 
     public void CheckRigidBody()
     {
-        if (MyRgd == null)
-        {
-            Rigidbody rbd = this.gameObject.AddComponent<Rigidbody>();
-            rbd.mass = 0.1f;
-            MyRgd = rbd;
-        }
-        else
-        {
-            Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
-            MyRgd = rb;
-        }
-        if (_PlayerType == PlayerType.OtherBalls)
-        {
-            MeshFilter = gameObject.GetComponent<MeshFilter>();
+        //if (MyRgd == null)
+        //{
+        //    Rigidbody rbd = this.gameObject.AddComponent<Rigidbody>();
+        //    rbd.mass = 0.1f;
+        //    MyRgd = rbd;
+        //}
+        //else
+        //{
+        //    Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
+        //    MyRgd = rb;
+        //}
+        //if (_PlayerType == PlayerType.OtherBalls)
+        //{
+        //    MeshFilter = gameObject.GetComponent<MeshFilter>();
 
-        }
-
+        //}
+        //MeshRenderer = gameObject.GetComponent<MeshRenderer>();
         //if (MyCollider == null)
         //{
         //    MyCollider = this.gameObject.AddComponent<MeshCollider>();
@@ -83,7 +83,8 @@ public class MergeData : MonoBehaviour
     [SerializeField] MaterialPropertyBlock Mpb;
     [SerializeField] GameObject[] EnjectedBalls;
     [SerializeField] Mesh[] BallMeshes;
-    [SerializeField] Color[] EnjectedBallsColors;
+    [SerializeField] MeshRenderer MeshRenderer;
+    [SerializeField] Material[] BallMaterial;
 
     public DOTweenAnimation MergeParticle;
     public Rigidbody MyRgd;
@@ -125,7 +126,9 @@ public class MergeData : MonoBehaviour
             {
                 //Mergeable = true;
                 BallIndex++;
+                //MeshRenderer.material = BallMaterial[BallIndex];
 
+                //MeshRenderer.materials[1] = BallMaterial[BallIndex];
                 Debug.Log($"{_PlayerType} : PlayerType");
                 Debug.Log("CallTween");
                 //  MyColor = RefMergeData.MyColor;
@@ -143,16 +146,21 @@ public class MergeData : MonoBehaviour
                         MyCollider.sharedMesh = BallMeshes[BallIndex];
                         //MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y + 0.1f, MeshFilter.gameObject.transform.position.z);
                         MeshFilter.mesh = BallMeshes[BallIndex];
+                        playerRankState.gameObject.SetActive(false);
                     }
 
                 }
-               
-                    //MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y + 0.1f, MeshFilter.gameObject.transform.position.z);
-                  
-                    Destroy(playerRankState.gameObject);
-                
-
-
+                else if (_PlayerType == PlayerType.OtherBalls)
+                {
+                    if (BallIndex < BallMeshes.Length)
+                    {
+                        //MeshRenderer.material = BallMaterial[BallIndex];
+                        //MyCollider.sharedMesh = BallMeshes[BallIndex];
+                        //MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y + 0.1f, MeshFilter.gameObject.transform.position.z);
+                        MeshFilter.mesh = BallMeshes[BallIndex];
+                        playerRankState.gameObject.SetActive(false);
+                    }
+                }
                 _PlayerRankStages = playerRankState._PlayerRankStages;
                 playerRankState.GetComponent<MeshRenderer>().enabled = false;
 
@@ -162,7 +170,7 @@ public class MergeData : MonoBehaviour
                 if (RefMergeData != null)
                 {
                     RefMergeData.MyRgd.freezeRotation = true;
-                    RefMergeData.MyRgd.AddForce(Vector3.back * 70f);
+                    // RefMergeData.MyRgd.AddForce(Vector3.back * 70f);
                     RefMergeData.MyRgd.freezeRotation = false;
                 }
                 //Mergeable = false;
@@ -262,14 +270,17 @@ public class MergeData : MonoBehaviour
                         //  ObstacleTriggered = true;
                         other.GetComponent<Collider>().enabled = false;
 
-                        Debug.Log($"{other.name}");
+                        Debug.Log($"{other.name} : Object that been collided");
                         Instantiate(EnjectedBalls[BallIndex - 1], new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
-                        MyColor = EnjectedBallsColors[BallIndex - 1];
                         MyTrailRenderer.startColor = MyColor;
-                        MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y - 0.1f, MeshFilter.gameObject.transform.position.z);
+                      //  MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y - 0.1f, MeshFilter.gameObject.transform.position.z);
                         BallIndex--;
+                        MeshRenderer.material = BallMaterial[BallIndex];
                         MeshFilter.mesh = BallMeshes[BallIndex];
                         StartCoroutine(ReduceScaleAnimation());
+                        break;
+                    case PlayerType.OtherBalls:
+                        this.gameObject.SetActive(false);
                         break;
                     default:
                         break;
@@ -279,6 +290,7 @@ public class MergeData : MonoBehaviour
             }
             else if (BallIndex == 0 && _PlayerType == PlayerType.PlayerBall)
             {
+                Debug.Log($"{other.name} : Object that been collided : {this.gameObject.name} = my name");
                 Hz.Gameplay.GameManager.instance.StageFailed();
             }
             else if (_PlayerType == PlayerType.OtherBalls)

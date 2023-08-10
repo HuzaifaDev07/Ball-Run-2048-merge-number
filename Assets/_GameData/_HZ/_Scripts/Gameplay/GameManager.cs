@@ -15,11 +15,13 @@ namespace Hz.Gameplay
         public GameObject[] Levels;
         public GameObject LevelCompletePanel;
         public GameObject LevelFailedPanel;
+        public FinishLineController FinishLine;
         #region ======= PlayerData ======
 
         #endregion
         private void Awake()
         {
+            Time.timeScale = 1;
             instance = this;
         }
         private void Start()
@@ -31,7 +33,8 @@ namespace Hz.Gameplay
         {
             LevelCompletePanel.SetActive(true);
             PrefData.PrefData.SetLevel(true, 1);
-     
+            FinishLine.PlayerMergeDataForFinish();
+            //Time.timeScale = 0;
         }
 
         public void ReloadScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -40,7 +43,7 @@ namespace Hz.Gameplay
         public void StageFailed()
         {
             LevelFailedPanel.SetActive(true);
-
+            Time.timeScale = 0;
         }
 
 
