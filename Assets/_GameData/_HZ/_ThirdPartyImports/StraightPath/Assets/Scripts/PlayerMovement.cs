@@ -18,10 +18,15 @@ namespace Hz.PlayerMove
         public float Radius = 2f;
         public float objectMoveSpeed = 2f;
         public bool touching = false;
+        public bool AutoMoveActive = false;
+        public bool EndPointReached = false;
+        public bool MainPlayer = false;
+        public int AutoMoveSpeed;
+        public Transform AutoMoveTarget;
         public GameObject MyParent;
         public Rigidbody rb;
         private MergeData mergeData;
-       
+
         Ray hit;
         [HideInInspector] public bool Booster = false;
         [HideInInspector] public bool Magnet = false;
@@ -51,61 +56,71 @@ namespace Hz.PlayerMove
 
         void Update()
         {
-            positionY = transform.localPosition.y;
-            foreach (Touch touch in Input.touches)
+            if (!AutoMoveActive)
             {
-                if (touch.phase == TouchPhase.Began)        //if finger touches the screen
+                positionY = transform.localPosition.y;
+                foreach (Touch touch in Input.touches)
                 {
-                    if (touching == false)
+                    if (touch.phase == TouchPhase.Began)        //if finger touches the screen
                     {
-                        touching = true;
-                        positionY = transform.localPosition.y;
+                        if (touching == false)
+                        {
+                            touching = true;
+                            positionY = transform.localPosition.y;
+                            initTouch = touch;
+                        }
+
+                    }
+                    else if (touch.phase == TouchPhase.Moved)       //if finger moves while touching the screen
+                    {
+                        float deltaX = initTouch.position.x - touch.position.x;
+                        positionX -= deltaX * Time.deltaTime * speed * dir;
+                        positionX = Mathf.Clamp(positionX, -mapWidth, mapWidth);      //to set the boundaries of the player's position
+                        transform.localPosition = new Vector3(positionX, positionY, 0f);
                         initTouch = touch;
                     }
-
-                }
-                else if (touch.phase == TouchPhase.Moved)       //if finger moves while touching the screen
-                {
-                    float deltaX = initTouch.position.x - touch.position.x;
-                    positionX -= deltaX * Time.deltaTime * speed * dir;
-                    positionX = Mathf.Clamp(positionX, -mapWidth, mapWidth);      //to set the boundaries of the player's position
-                    transform.localPosition = new Vector3(positionX, positionY, 0f);
-                    initTouch = touch;
-                }
-                else if (touch.phase == TouchPhase.Ended)       //if finger releases the screen
-                {
-                    initTouch = new Touch();
-                    touching = false;
-                }
-            }
-            //if you play on computer---------------------------------
-            float x = Input.GetAxis("Horizontal") * Time.deltaTime * computerSpeed;     //you can move by pressing 'a' - 'd' or the arrow keys
-            Vector3 newPosition = rb.transform.localPosition + Vector3.right * x;
-            newPosition.x = Mathf.Clamp(newPosition.x, -mapWidth, mapWidth);
-            transform.localPosition = newPosition;
-
-            if (Magnet)
-            {
-                //--------------------------------------------------------
-                RaycastHit[] hits = Physics.SphereCastAll(transform.position, Radius, Vector3.forward, 0f);
-
-                // Loop through all the hits to find objects with the target tag
-                foreach (RaycastHit hit in hits)
-                {
-                    MergeData MD = hit.collider.GetComponent<MergeData>();
-                    if (MD != null && hit.collider.CompareTag("Ball"))
+                    else if (touch.phase == TouchPhase.Ended)       //if finger releases the screen
                     {
-                        // Check if the object's BallIndex matches the player's BallIndex
-                        if (MD.BallIndex == GetComponent<MergeData>().BallIndex)
-                        {
-                            Vector3 targetPos = transform.position + Vector3.up; // You can adjust the offset if needed
-                            float duration = Vector3.Distance(MD.transform.position, targetPos) / objectMoveSpeed; // Calculate duration based on distance and speed
+                        initTouch = new Touch();
+                        touching = false;
+                    }
+                }
+                //if you play on computer---------------------------------
+                float x = Input.GetAxis("Horizontal") * Time.deltaTime * computerSpeed;     //you can move by pressing 'a' - 'd' or the arrow keys
+                Vector3 newPosition = rb.transform.localPosition + Vector3.right * x;
+                newPosition.x = Mathf.Clamp(newPosition.x, -mapWidth, mapWidth);
+                transform.localPosition = newPosition;
 
-                            // Move the objects towards the player using DOTween
-                            MD.gameObject.transform.DOMove(targetPos, duration);
-                            break;
+                if (Magnet)
+                {
+                    //--------------------------------------------------------
+                    RaycastHit[] hits = Physics.SphereCastAll(transform.position, Radius, Vector3.forward, 0f);
+
+                    // Loop through all the hits to find objects with the target tag
+                    foreach (RaycastHit hit in hits)
+                    {
+                        MergeData MD = hit.collider.GetComponent<MergeData>();
+                        if (MD != null && hit.collider.CompareTag("Ball"))
+                        {
+                            // Check if the object's BallIndex matches the player's BallIndex
+                            if (MD.BallIndex == GetComponent<MergeData>().BallIndex)
+                            {
+                                Vector3 targetPos = transform.position + Vector3.up; // You can adjust the offset if needed
+                                float duration = Vector3.Distance(MD.transform.position, targetPos) / objectMoveSpeed; // Calculate duration based on distance and speed
+
+                                // Move the objects towards the player using DOTween
+                                MD.gameObject.transform.DOMove(targetPos, duration);
+                                break;
+                            }
                         }
                     }
+                }
+            }
+            else
+            {
+                if (!EndPointReached)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, AutoMoveTarget.position, AutoMoveSpeed * Time.deltaTime);
                 }
             }
         }
@@ -151,19 +166,29 @@ namespace Hz.PlayerMove
             }
             if (other.CompareTag("Finish"))
             {
+                EndPointReached = true;
                 Gameplay.GameManager.instance.StageClear();
             }
-            if (other.CompareTag("Failed"))
+            if (other.CompareTag("Failed") && MainPlayer)
             {
                 Gameplay.GameManager.instance.StageFailed();
             }
+            if (other.CompareTag("AutoControl"))
+            {
+                ActiveAutoMove();
+            }
         }
 
-        private void OnDrawGizmos()
+        //private void OnDrawGizmos()
+        //{
+        //    Gizmos.color = Color.green;
+        //    Gizmos.DrawWireSphere(transform.position, Radius);
+        //}
+
+        public void ActiveAutoMove()
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, Radius);
+            FollowPath.enabled = false;
+            AutoMoveActive = true;
         }
-
     }
 }

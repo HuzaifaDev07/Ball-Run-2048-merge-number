@@ -13,6 +13,8 @@ TagManager:
   - Ball
   - PowerUp
   - Failed
+  - Glass
+  - AutoControl
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,8 @@ namespace Hz.Gameplay
         public static GameManager instance;
         public Color[] TotalColors;
         public GameObject[] Levels;
+        public PathCreation.PathCreator[] LevelsPath;
+        public FollowPath PlayerFollowPath;
         public GameObject LevelCompletePanel;
         public GameObject LevelFailedPanel;
         public FinishLineController FinishLine;
@@ -26,15 +28,20 @@ namespace Hz.Gameplay
         }
         private void Start()
         {
+            PrefData.PrefData.SetLevel(false, 10);
             Levels[PrefData.PrefData.GetLevels()].SetActive(true);
+            PlayerFollowPath.path = LevelsPath[PrefData.PrefData.GetLevels()];
         }
 
         public void StageClear()
         {
-            LevelCompletePanel.SetActive(true);
-            PrefData.PrefData.SetLevel(true, 1);
             FinishLine.PlayerMergeDataForFinish();
-            //Time.timeScale = 0;
+
+
+        }
+        public void LevelCompleted()
+        {
+            StartCoroutine(DelayCallLevelComplet());
         }
 
         public void ReloadScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -47,6 +54,18 @@ namespace Hz.Gameplay
         }
 
 
+        IEnumerator DelayCallLevelComplet()
+        {
+            yield return new WaitForSeconds(2f);
+            LevelCompletePanel.SetActive(true);
+            PrefData.PrefData.SetLevel(true, 1);
+            Time.timeScale = 0;
+        }
+        public void SwitchCamera(Transform transform)
+        {
+            FinishLine.CutSceneVirtualCamera.m_Follow = transform;
+            FinishLine.CutSceneVirtualCamera.m_LookAt = transform;
+        }
     }
 }
 

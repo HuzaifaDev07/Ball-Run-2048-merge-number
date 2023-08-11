@@ -20,6 +20,10 @@ namespace Hz.PrefData
             {
                 PlayerPrefs.SetInt(LevelString, GetLevels() + IncreaseAmount);
             }
+            else
+            {
+                PlayerPrefs.SetInt(LevelString,IncreaseAmount);
+            }
             return PrefData.GetLevels();
         }
     }

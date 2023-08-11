@@ -8,7 +8,7 @@ public class FollowPath : MonoBehaviour
     public EndOfPathInstruction endOfPathInstruction;
     public float movementSpeed = 5f;
 
-    [SerializeField] PathCreator path;
+    public PathCreator path;
 
     [HideInInspector]
     public float distanceTravelled;

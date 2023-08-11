@@ -10,32 +10,37 @@ public class MergeData : MonoBehaviour
 {
     private void OnValidate()
     {
-        CheckRigidBody();
+        if (_PlayerType == PlayerType.OtherBalls)
+        {
+              CheckRigidBody();
+        }
     }
 
     public void CheckRigidBody()
     {
-        //if (MyRgd == null)
-        //{
-        //    Rigidbody rbd = this.gameObject.AddComponent<Rigidbody>();
-        //    rbd.mass = 0.1f;
-        //    MyRgd = rbd;
-        //}
-        //else
-        //{
-        //    Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
-        //    MyRgd = rb;
-        //}
-        //if (_PlayerType == PlayerType.OtherBalls)
-        //{
-        //    MeshFilter = gameObject.GetComponent<MeshFilter>();
 
-        //}
-        //MeshRenderer = gameObject.GetComponent<MeshRenderer>();
-        //if (MyCollider == null)
-        //{
-        //    MyCollider = this.gameObject.AddComponent<MeshCollider>();
-        //}
+        if (MyRgd == null)
+        {
+            Rigidbody rbd = this.gameObject.AddComponent<Rigidbody>();
+            rbd.mass = 0.1f;
+            MyRgd = rbd;
+        }
+        else
+        {
+            Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
+            MyRgd = rb;
+        }
+        if (_PlayerType == PlayerType.OtherBalls)
+        {
+            MeshFilter = gameObject.GetComponent<MeshFilter>();
+            MeshRenderer = gameObject.GetComponent<MeshRenderer>();
+        }
+        
+        if (MyCollider == null)
+        {
+            MyCollider = this.gameObject.AddComponent<MeshCollider>();
+            MyCollider.convex = true;
+        }
     }
     public enum PlayerRankStages
     {
@@ -105,8 +110,7 @@ public class MergeData : MonoBehaviour
                 {
                     // The ray hit an object with the specified tag
                     IsMergeable(hitObject.GetComponent<MergeData>());
-                    Debug.Log("FromStay");
-
+                    return;
                     // You can now perform actions or access properties of the hitObject
                     // For example, you can access its transform, components, etc.
                 }
@@ -134,9 +138,9 @@ public class MergeData : MonoBehaviour
                 //  MyColor = RefMergeData.MyColor;
                 if (_PlayerType == PlayerType.PlayerBall)
                 {
-
-                    MyAudioSource.clip = MergeSound;
-                    MyAudioSource.Play();
+                    MyAudioSource.PlayOneShot(MergeSound);
+                    //MyAudioSource.clip = ;
+                    //MyAudioSource.Play();
                     StartCoroutine(WaitforScaleAnimation());
                     //  MyTrailRenderer.startColor = MyColor;
                     MergeParticle.gameObject.SetActive(true);
@@ -154,9 +158,7 @@ public class MergeData : MonoBehaviour
                 {
                     if (BallIndex < BallMeshes.Length)
                     {
-                        //MeshRenderer.material = BallMaterial[BallIndex];
-                        //MyCollider.sharedMesh = BallMeshes[BallIndex];
-                        //MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y + 0.1f, MeshFilter.gameObject.transform.position.z);
+
                         MeshFilter.mesh = BallMeshes[BallIndex];
                         playerRankState.gameObject.SetActive(false);
                     }
@@ -167,14 +169,12 @@ public class MergeData : MonoBehaviour
             }
             else
             {
-                if (RefMergeData != null)
+                if (_PlayerType == PlayerType.PlayerBall && !collided)
                 {
-                    RefMergeData.MyRgd.freezeRotation = true;
-                    // RefMergeData.MyRgd.AddForce(Vector3.back * 70f);
-                    RefMergeData.MyRgd.freezeRotation = false;
+                    MyAudioSource.PlayOneShot(NotMergeSound);
+                    //MyAudioSource.clip = ;
+                   // MyAudioSource.Play();
                 }
-                //Mergeable = false;
-
             }
         }
     }
@@ -222,12 +222,14 @@ public class MergeData : MonoBehaviour
             RefMergeData = collision.gameObject.GetComponent<MergeData>();
 
             IsMergeable(RefMergeData);
-            if (_PlayerType == PlayerType.PlayerBall && !collided)
+            if (_PlayerType == PlayerType.PlayerBall)
             {
-                MyAudioSource.clip = NotMergeSound;
-                MyAudioSource.Play();
-
+                Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+                rb.AddForce(Vector3.forward * 30f);
+                rb.AddForce(Vector3.up * 7);
             }
+
+
         }
     }
 
@@ -246,82 +248,55 @@ public class MergeData : MonoBehaviour
             collider = false;
         }
     }
-    private void OnDrawGizmos()
-    {
-        if (transform != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(transform.position, transform.forward * 2); // Draw the ray for visualization
-        }
-    }
     bool ObstacleTriggered;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(ObstacleTag))
         {
-            if (BallIndex != 0)
+
+            if (BallIndex > -1)
             {
                 switch (_PlayerType)
                 {
                     case PlayerType.PlayerBall:
+                        other.GetComponent<Collider>().enabled = false;
                         MyAudioSource.clip = SplitSound;
-                        MyAudioSource.Play();
+                        //MyAudioSource.Play();
                         Handheld.Vibrate();
                         //  ObstacleTriggered = true;
-                        other.GetComponent<Collider>().enabled = false;
 
                         Debug.Log($"{other.name} : Object that been collided");
-                        Instantiate(EnjectedBalls[BallIndex - 1], new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
-                        MyTrailRenderer.startColor = MyColor;
-                      //  MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y - 0.1f, MeshFilter.gameObject.transform.position.z);
                         BallIndex--;
+                        Instantiate(EnjectedBalls[BallIndex], new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
+                        MyTrailRenderer.startColor = MyColor;
+                        //  MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y - 0.1f, MeshFilter.gameObject.transform.position.z);
                         MeshRenderer.material = BallMaterial[BallIndex];
                         MeshFilter.mesh = BallMeshes[BallIndex];
                         StartCoroutine(ReduceScaleAnimation());
                         break;
                     case PlayerType.OtherBalls:
-                        this.gameObject.SetActive(false);
+
                         break;
                     default:
                         break;
                 }
+            }
+            else if (BallIndex < 0 && _PlayerType == PlayerType.PlayerBall)
+            {
+                if (BallIndex != 0)
+                {
+                    Hz.Gameplay.GameManager.instance.StageFailed();
+                }
+                Debug.Log($"{other.name} : Object that been collided : {gameObject.name} = my name");
 
-                return;
             }
-            else if (BallIndex == 0 && _PlayerType == PlayerType.PlayerBall)
-            {
-                Debug.Log($"{other.name} : Object that been collided : {this.gameObject.name} = my name");
-                Hz.Gameplay.GameManager.instance.StageFailed();
-            }
-            else if (_PlayerType == PlayerType.OtherBalls)
-            {
-                MyRgd.AddForce(Vector3.up * 1075f);
-            }
+
+
+        }
+        if (other.gameObject.CompareTag("Failed") && _PlayerType == PlayerType.OtherBalls)
+        {
+            Debug.Log($"{other.gameObject.name} : Ball Name ");
+            gameObject.SetActive(false);
         }
     }
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag(ObstacleTag))
-    //    {
-    //        switch (_PlayerType)
-    //        {
-    //            case PlayerType.PlayerBall:
-    //                ObstacleTriggered = true;
-    //                break;
-    //        }
-    //    }
-    //}
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag(ObstacleTag))
-    //    {
-    //        switch (_PlayerType)
-    //        {
-    //            case PlayerType.PlayerBall:
-    //                ObstacleTriggered = false;
-    //                break;
-    //        }
-
-    //    }
-    //}
 }
