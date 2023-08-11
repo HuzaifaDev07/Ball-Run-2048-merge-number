@@ -18,6 +18,10 @@ namespace Hz.Gameplay
         public GameObject LevelCompletePanel;
         public GameObject LevelFailedPanel;
         public FinishLineController FinishLine;
+        public LevelsBaseBallWorking LevelsBaseBallWorking;
+        public Transform BallMainParentForNotFollow;
+        public Transform BallObjectForFollow;
+        public Cinemachine.CinemachineVirtualCamera VirtualCamera;
         #region ======= PlayerData ======
 
         #endregion
@@ -28,9 +32,21 @@ namespace Hz.Gameplay
         }
         private void Start()
         {
-            PrefData.PrefData.SetLevel(false, 10);
+            //PrefData.PrefData.SetLevel(false, 14);
             Levels[PrefData.PrefData.GetLevels()].SetActive(true);
             PlayerFollowPath.path = LevelsPath[PrefData.PrefData.GetLevels()];
+            PlayerMove.PlayerMovement.instance.mapWidth = LevelsBaseBallWorking.levelDatas[PrefData.PrefData.GetLevels()].mapWidth;
+            if (LevelsBaseBallWorking.levelDatas[PrefData.PrefData.GetLevels()].FollowBall)
+            {
+                VirtualCamera.m_Follow = BallObjectForFollow;
+                VirtualCamera.m_LookAt = BallObjectForFollow;
+            }
+            else
+            {
+                VirtualCamera.m_Follow = BallMainParentForNotFollow;
+                VirtualCamera.m_LookAt = BallMainParentForNotFollow;
+            }
+
         }
 
         public void StageClear()

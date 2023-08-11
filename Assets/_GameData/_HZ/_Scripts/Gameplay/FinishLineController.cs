@@ -25,17 +25,17 @@ public class FinishLineController : MonoBehaviour
 
     public void PlayerMergeDataForFinish()
     {
-        GlassAudioSource.PlayOneShot(ReachFinishEndPoint);
+    
         CutSceneDirector.gameObject.SetActive(true);
-      //  PlayerCamera.SetActive(true);
-      //  CutSceneCamera.SetActive(true);
+        PlayerCamera.SetActive(false);
+        CutSceneCamera.SetActive(true);
         PlayerMovement.enabled = false;
         Followpath.enabled = false;
         for (int i = 0; i <= PlayerMergeData.BallIndex; i++)
         {
             FinishPoints[i].SetActive(true);
         }
-        ReachedBall[PlayerMergeData.BallIndex].SetActive(true);
+     
         CutSceneDirector.Play();
     }
 

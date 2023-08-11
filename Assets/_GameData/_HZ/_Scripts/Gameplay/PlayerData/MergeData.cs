@@ -12,7 +12,7 @@ public class MergeData : MonoBehaviour
     {
         if (_PlayerType == PlayerType.OtherBalls)
         {
-              CheckRigidBody();
+            CheckRigidBody();
         }
     }
 
@@ -35,7 +35,7 @@ public class MergeData : MonoBehaviour
             MeshFilter = gameObject.GetComponent<MeshFilter>();
             MeshRenderer = gameObject.GetComponent<MeshRenderer>();
         }
-        
+
         if (MyCollider == null)
         {
             MyCollider = this.gameObject.AddComponent<MeshCollider>();
@@ -94,7 +94,8 @@ public class MergeData : MonoBehaviour
     public DOTweenAnimation MergeParticle;
     public Rigidbody MyRgd;
     public TrailRenderer MyTrailRenderer;
-
+    bool collider = false;
+    bool collided;
     private void Update()
     {
         if (_PlayerType == PlayerType.PlayerBall)
@@ -118,7 +119,7 @@ public class MergeData : MonoBehaviour
         }
     }
 
-    bool collided;
+   
     public void IsMergeable(MergeData playerRankState)
     {
         collider = true;
@@ -172,8 +173,9 @@ public class MergeData : MonoBehaviour
                 if (_PlayerType == PlayerType.PlayerBall && !collided)
                 {
                     MyAudioSource.PlayOneShot(NotMergeSound);
+                    return;
                     //MyAudioSource.clip = ;
-                   // MyAudioSource.Play();
+                    // MyAudioSource.Play();
                 }
             }
         }
@@ -213,7 +215,7 @@ public class MergeData : MonoBehaviour
         RefMergeData = null;
     }
 
-    bool collider = false;
+   
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
@@ -225,8 +227,8 @@ public class MergeData : MonoBehaviour
             if (_PlayerType == PlayerType.PlayerBall)
             {
                 Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-                rb.AddForce(Vector3.forward * 30f);
-                rb.AddForce(Vector3.up * 7);
+                rb.AddForce(Vector3.forward * 1.5f);
+                rb.AddForce(Vector3.up * 1.5f);
             }
 
 
@@ -254,7 +256,7 @@ public class MergeData : MonoBehaviour
         if (other.gameObject.CompareTag(ObstacleTag))
         {
 
-            if (BallIndex > -1)
+            if (BallIndex != 0)
             {
                 switch (_PlayerType)
                 {
@@ -270,7 +272,7 @@ public class MergeData : MonoBehaviour
                         Instantiate(EnjectedBalls[BallIndex], new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
                         MyTrailRenderer.startColor = MyColor;
                         //  MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y - 0.1f, MeshFilter.gameObject.transform.position.z);
-                        MeshRenderer.material = BallMaterial[BallIndex];
+                       // MeshRenderer.material = BallMaterial[BallIndex];
                         MeshFilter.mesh = BallMeshes[BallIndex];
                         StartCoroutine(ReduceScaleAnimation());
                         break;
@@ -281,12 +283,11 @@ public class MergeData : MonoBehaviour
                         break;
                 }
             }
-            else if (BallIndex < 0 && _PlayerType == PlayerType.PlayerBall)
+            else if (BallIndex == 0 && _PlayerType == PlayerType.PlayerBall)
             {
-                if (BallIndex != 0)
-                {
-                    Hz.Gameplay.GameManager.instance.StageFailed();
-                }
+
+                Hz.Gameplay.GameManager.instance.StageFailed();
+
                 Debug.Log($"{other.name} : Object that been collided : {gameObject.name} = my name");
 
             }
