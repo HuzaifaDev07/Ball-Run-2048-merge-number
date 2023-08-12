@@ -10,6 +10,11 @@ namespace Hz.Gameplay
 {
     public class GameManager : MonoBehaviour
     {
+        [System.Serializable]
+        public class LevelsBalls
+        {
+            public MergeData[] LevelBalls;
+        }
         public static GameManager instance;
         public Color[] TotalColors;
         public GameObject[] Levels;
@@ -22,21 +27,44 @@ namespace Hz.Gameplay
         public Transform BallMainParentForNotFollow;
         public Transform BallObjectForFollow;
         public Cinemachine.CinemachineVirtualCamera VirtualCamera;
+        public LevelsBalls[] _LevelBalls;
+        int levelIndex;
         #region ======= PlayerData ======
 
         #endregion
+
+        #region ------------ UI -----------------
+        public GameObject MainScreen;
+
+        #endregion
+
+
         private void Awake()
         {
-            Time.timeScale = 1;
+
             instance = this;
-        }
-        private void Start()
-        {
             //PrefData.PrefData.SetLevel(false, 14);
-            Levels[PrefData.PrefData.GetLevels()].SetActive(true);
-            PlayerFollowPath.path = LevelsPath[PrefData.PrefData.GetLevels()];
-            PlayerMove.PlayerMovement.instance.mapWidth = LevelsBaseBallWorking.levelDatas[PrefData.PrefData.GetLevels()].mapWidth;
-            if (LevelsBaseBallWorking.levelDatas[PrefData.PrefData.GetLevels()].FollowBall)
+            if (PrefData.PrefData.GetLevels() < Levels.Length)
+            {
+                levelIndex = PrefData.PrefData.GetLevels();
+            }
+            else
+            {
+                levelIndex = Random.Range(0, Levels.Length);
+            }
+
+            if (levelIndex > Levels.Length)
+            {
+             
+                PlayerFollowPath.path = LevelsPath[levelIndex];
+                Levels[levelIndex].SetActive(true);
+            }
+            else
+            {
+                PlayerFollowPath.path = LevelsPath[levelIndex];
+                Levels[levelIndex].SetActive(true);
+            }
+            if (LevelsBaseBallWorking.levelDatas[levelIndex].FollowBall)
             {
                 VirtualCamera.m_Follow = BallObjectForFollow;
                 VirtualCamera.m_LookAt = BallObjectForFollow;
@@ -46,14 +74,37 @@ namespace Hz.Gameplay
                 VirtualCamera.m_Follow = BallMainParentForNotFollow;
                 VirtualCamera.m_LookAt = BallMainParentForNotFollow;
             }
-
         }
+
+        private IEnumerator Start()
+        {
+            yield return new WaitForSeconds(0.2f);
+            PlayerMove.PlayerMovement.instance.mapWidth = LevelsBaseBallWorking.levelDatas[levelIndex].mapWidth;
+            Time.timeScale = 0;
+            PlayerFollowPath.enabled = false;
+        }
+
+        public void StartGamePlay()
+        {
+            MainScreen.SetActive(false);
+            PlayerFollowPath.enabled = true;
+            Time.timeScale = 1;
+        }
+
+        public void UpgradeBall()
+        {
+            for (int i = 0; i < _LevelBalls[levelIndex].LevelBalls.Length; i++)
+            {
+                _LevelBalls[levelIndex].LevelBalls[i].UpgrageBall();
+            }
+            PlayerFollowPath.enabled = true;
+            Time.timeScale = 1;
+        }
+
 
         public void StageClear()
         {
             FinishLine.PlayerMergeDataForFinish();
-
-
         }
         public void LevelCompleted()
         {
@@ -66,7 +117,8 @@ namespace Hz.Gameplay
         public void StageFailed()
         {
             LevelFailedPanel.SetActive(true);
-            Time.timeScale = 0;
+            PlayerFollowPath.enabled = false;
+            // Time.timeScale = 0;
         }
 
 
@@ -75,7 +127,7 @@ namespace Hz.Gameplay
             yield return new WaitForSeconds(2f);
             LevelCompletePanel.SetActive(true);
             PrefData.PrefData.SetLevel(true, 1);
-            Time.timeScale = 0;
+            //   Time.timeScale = 0;
         }
         public void SwitchCamera(Transform transform)
         {

@@ -1,0 +1,63 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://assetstore.unity.com/packages/tools/sprite-management/texturepacker-importer-16641
+#
+# created with Free texture packer v0.6.7
+# http://free-tex-packer.com
+#
+:format=40300
+:texture=ball run 2048 ui.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+
+pane 2 .png;2;1320;685;726; 0.5;0.5; 0;0;0;0
+rays 1.png;2;606;710;710; 0.5;0.5; 0;0;0;0
+setting panel.png;691;1347;685;699; 0.5;0.5; 0;0;0;0
+Logo 1 .png;1380;1745;643;301; 0.5;0.5; 0;0;0;0
+rays 2 .png;2;45;720;557; 0.5;0.5; 0;0;0;0
+No Thanks .png;2;4;196;37; 0.5;0.5; 0;0;0;0
+loading fill .png;202;11;354;30; 0.5;0.5; 0;0;0;0
+Ribbon .png;1380;1627;606;114; 0.5;0.5; 0;0;0;0
+upgreat Arrow .png;1990;1692;39;49; 0.5;0.5; 0;0;0;0
+loading emt .png;1380;1579;548;44; 0.5;0.5; 0;0;0;0
+hand .png;1932;1492;110;131; 0.5;0.5; 0;0;0;0
+move Arrow .png;1380;1521;512;54; 0.5;0.5; 0;0;0;0
+Xp bar.png;1380;1438;488;79; 0.5;0.5; 0;0;0;0
+off button .png;1872;1427;152;61; 0.5;0.5; 0;0;0;0
+stage .png;1380;1235;483;199; 0.5;0.5; 0;0;0;0
+open chest box .png;1380;871;481;360; 0.5;0.5; 0;0;0;0
+emt ball .png;716;609;259;258; 0.5;0.5; 0;0;0;0
+get more earning text .png;979;1283;394;60; 0.5;0.5; 0;0;0;0
+ad tv 2 .png;979;1085;391;194; 0.5;0.5; 0;0;0;0
+fill ball .png;716;1253;245;90; 0.5;0.5; 0;0;0;0
+Setting .png;716;1174;238;75; 0.5;0.5; 0;0;0;0
+Rate us text .png;716;1110;234;60; 0.5;0.5; 0;0;0;0
+on button .png;1867;1363;152;60; 0.5;0.5; 0;0;0;0
+ad button 2 .png;1867;1228;140;131; 0.5;0.5; 0;0;0;0
+Chest box .png;979;785;357;296; 0.5;0.5; 0;0;0;0
+win .png;716;1018;217;88; 0.5;0.5; 0;0;0;0
+star 1 .png;716;890;132;124; 0.5;0.5; 0;0;0;0
+star 3.png;852;910;108;104; 0.5;0.5; 0;0;0;0
+icon 2 .png;1865;1079;124;145; 0.5;0.5; 0;0;0;0
+satr 2 .png;1865;972;108;103; 0.5;0.5; 0;0;0;0
+bu  icon 2.png;1865;866;102;102; 0.5;0.5; 0;0;0;0
+Setting button .png;1971;894;73;74; 0.5;0.5; 0;0;0;0
+hader .png;1340;569;447;298; 0.5;0.5; 0;0;0;0
+hold and tex.png;979;693;338;88; 0.5;0.5; 0;0;0;0
+ad icon .png;979;568;328;121; 0.5;0.5; 0;0;0;0
+collect text .png;726;542;215;63; 0.5;0.5; 0;0;0;0
+Magnet card .png;1791;599;195;263; 0.5;0.5; 0;0;0;0
+Speed card .png;1791;332;195;263; 0.5;0.5; 0;0;0;0
+ad tv .png;726;15;279;313; 0.5;0.5; 0;0;0;0
+Button 2g  .png;1311;416;419;149; 0.5;0.5; 0;0;0;0
+coin bar .png;726;341;191;71; 0.5;0.5; 0;0;0;0
+dont like text .png;921;349;399;63; 0.5;0.5; 0;0;0;0
+star 3s .png;726;452;89;86; 0.5;0.5; 0;0;0;0
+coin 2 .png;819;455;79;83; 0.5;0.5; 0;0;0;0
+emt bar .png;945;512;315;52; 0.5;0.5; 0;0;0;0
+Arrow .png;945;446;78;62; 0.5;0.5; 0;0;0;0
+ball card .png;1009;65;195;263; 0.5;0.5; 0;0;0;0
+fill bar .png;1009;18;306;43; 0.5;0.5; 0;0;0;0

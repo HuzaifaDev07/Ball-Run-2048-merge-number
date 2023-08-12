@@ -29,7 +29,7 @@ public class PowerUp : MonoBehaviour
                 case PowerUpType.Booster:
                     playerMovement.Booster = true;
                     playerMovement.BoosterState(true);
-                    StartCoroutine(EndPowerUp(1f));
+                    StartCoroutine(EndPowerUp(3f));
                     break;
                 case PowerUpType.Magnet:
                     playerMovement.Magnet = true;
@@ -39,7 +39,7 @@ public class PowerUp : MonoBehaviour
                     playerMovement.SuperPowerState(true);
                     playerMovement.SuperPower = true;
                     playerMovement.Magnet = true;
-                    StartCoroutine(EndPowerUp(3f));
+                    StartCoroutine(EndPowerUp(6f));
                     break;
                 default:
                     break;
@@ -54,6 +54,7 @@ public class PowerUp : MonoBehaviour
         playerMovement.SuperPowerState(false);
         playerMovement.BoosterState(false);
         CallOnce = false;
+        playerMovement.MagnetObj.SetActive(false);
         playerMovement.Booster = false;
         playerMovement.Magnet = false;
         playerMovement.SuperPower = false;

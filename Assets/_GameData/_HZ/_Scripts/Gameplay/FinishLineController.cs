@@ -21,6 +21,7 @@ public class FinishLineController : MonoBehaviour
     public AudioClip WinSound;
     public AudioClip ReachFinishEndPlatform;
     public AudioClip ReachFinishEndPoint;
+    public AudioClip StairSound;
     public GameObject ConfettiParticles;
 
     public void PlayerMergeDataForFinish()

@@ -1,0 +1,11 @@
+version: 2
+tpsheetFileNames:
+- Assets/_GameData/_HZ/_2DAssets/UI/ball run 2048 ui.tpsheet
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+textureFileNames:
+- Assets/_GameData/_HZ/_2DAssets/UI/ball run 2048 ui.png
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+normalmapFileNames:
+- 
+- Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+enableDebugOutput: 0

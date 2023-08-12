@@ -21,11 +21,13 @@ namespace Hz.PlayerMove
         public bool AutoMoveActive = false;
         public bool EndPointReached = false;
         public bool MainPlayer = false;
+        public bool ObstacleCross = false;
         public int AutoMoveSpeed;
         public Transform AutoMoveTarget;
         public GameObject MyParent;
         public Rigidbody rb;
         private MergeData mergeData;
+        public GameObject MagnetObj;
 
         Ray hit;
         [HideInInspector] public bool Booster = false;
@@ -36,6 +38,7 @@ namespace Hz.PlayerMove
         [Header("******** tweens Assets ********")]
         public DOTweenAnimation MyScaleTween;
         public Jun_TweenRuntime WingsTween;
+        public GameObject WingObject;
         #endregion
 
         #region ------- Particles -----------
@@ -95,7 +98,7 @@ namespace Hz.PlayerMove
                 {
                     //--------------------------------------------------------
                     RaycastHit[] hits = Physics.SphereCastAll(transform.position, Radius, Vector3.forward, 0f);
-
+                    MagnetObj.SetActive(true);
                     // Loop through all the hits to find objects with the target tag
                     foreach (RaycastHit hit in hits)
                     {
@@ -131,14 +134,17 @@ namespace Hz.PlayerMove
         {
             if (check)
             {
+                MagnetObj.SetActive(true);
                 rb.isKinematic = true;
                 WingsTween.Play();
+                WingObject.SetActive(true);
             }
             else
             {
+                MagnetObj.SetActive(true);
                 rb.isKinematic = false;
                 MyParent.transform.position = new Vector3(MyParent.transform.position.x, 0, MyParent.transform.position.z);
-                WingsTween.StopPlay();
+                WingObject.SetActive(false);
             }
         }
 
@@ -146,13 +152,13 @@ namespace Hz.PlayerMove
         {
             if (check)
             {
-                FollowPath.movementSpeed = 25;
+                ObstacleCross = true;
                 BoosterParticle.SetActive(true);
             }
             else
             {
+                ObstacleCross = false;
                 BoosterParticle.SetActive(false);
-                FollowPath.movementSpeed = 7;
             }
         }
 
@@ -178,12 +184,6 @@ namespace Hz.PlayerMove
                 ActiveAutoMove();
             }
         }
-
-        //private void OnDrawGizmos()
-        //{
-        //    Gizmos.color = Color.green;
-        //    Gizmos.DrawWireSphere(transform.position, Radius);
-        //}
 
         public void ActiveAutoMove()
         {

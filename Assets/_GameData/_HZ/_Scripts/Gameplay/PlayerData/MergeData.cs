@@ -96,6 +96,7 @@ public class MergeData : MonoBehaviour
     public TrailRenderer MyTrailRenderer;
     bool collider = false;
     bool collided;
+    bool IsMerged;
     private void Update()
     {
         if (_PlayerType == PlayerType.PlayerBall)
@@ -119,7 +120,7 @@ public class MergeData : MonoBehaviour
         }
     }
 
-   
+
     public void IsMergeable(MergeData playerRankState)
     {
         collider = true;
@@ -129,6 +130,7 @@ public class MergeData : MonoBehaviour
             Debug.Log($"{playerRankState.BallIndex} : Player");
             if (BallIndex == playerRankState.BallIndex)
             {
+                IsMerged = true;
                 //Mergeable = true;
                 BallIndex++;
                 //MeshRenderer.material = BallMaterial[BallIndex];
@@ -140,12 +142,9 @@ public class MergeData : MonoBehaviour
                 if (_PlayerType == PlayerType.PlayerBall)
                 {
                     MyAudioSource.PlayOneShot(MergeSound);
-                    //MyAudioSource.clip = ;
-                    //MyAudioSource.Play();
+                  
                     StartCoroutine(WaitforScaleAnimation());
-                    //  MyTrailRenderer.startColor = MyColor;
-                    MergeParticle.gameObject.SetActive(true);
-                    MergeParticle.DOPlay();
+                 
                     if (BallIndex < BallMeshes.Length)
                     {
                         MyCollider.sharedMesh = BallMeshes[BallIndex];
@@ -170,15 +169,24 @@ public class MergeData : MonoBehaviour
             }
             else
             {
-                if (_PlayerType == PlayerType.PlayerBall && !collided)
-                {
-                    MyAudioSource.PlayOneShot(NotMergeSound);
-                    return;
-                    //MyAudioSource.clip = ;
-                    // MyAudioSource.Play();
-                }
+                IsMerged = false;
             }
         }
+    }
+
+    public void UpgrageBall()
+    {
+        if (BallIndex < BallMeshes.Length - 1)
+        {
+            BallIndex++;
+            MeshFilter.mesh = BallMeshes[BallIndex];
+        }
+        Hz.Gameplay.GameManager.instance.MainScreen.SetActive(false);
+        if (_PlayerType == PlayerType.PlayerBall)
+        {
+            PlayerMovement.FollowPath.enabled = true;
+        }
+
     }
     IEnumerator WaitforScaleAnimation()
     {
@@ -215,7 +223,7 @@ public class MergeData : MonoBehaviour
         RefMergeData = null;
     }
 
-   
+
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
@@ -224,16 +232,20 @@ public class MergeData : MonoBehaviour
             RefMergeData = collision.gameObject.GetComponent<MergeData>();
 
             IsMergeable(RefMergeData);
+            if (!IsMerged)
+            {
+                MyAudioSource.PlayOneShot(NotMergeSound);
+            }
             if (_PlayerType == PlayerType.PlayerBall)
             {
                 Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
                 rb.AddForce(Vector3.forward * 1.5f);
                 rb.AddForce(Vector3.up * 1.5f);
             }
-
-
         }
     }
+    //Coroutine _StopCoroutine;
+
 
     private void OnCollisionStay(UnityEngine.Collision collision)
     {
@@ -253,7 +265,7 @@ public class MergeData : MonoBehaviour
     bool ObstacleTriggered;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(ObstacleTag))
+        if (other.gameObject.CompareTag(ObstacleTag) && !PlayerMovement.ObstacleCross)
         {
 
             if (BallIndex != 0)
@@ -262,8 +274,8 @@ public class MergeData : MonoBehaviour
                 {
                     case PlayerType.PlayerBall:
                         other.GetComponent<Collider>().enabled = false;
-                        MyAudioSource.clip = SplitSound;
-                        //MyAudioSource.Play();
+                        //MyAudioSource.clip = SplitSound;
+                        MyAudioSource.PlayOneShot(SplitSound);
                         Handheld.Vibrate();
                         //  ObstacleTriggered = true;
 
@@ -271,8 +283,6 @@ public class MergeData : MonoBehaviour
                         BallIndex--;
                         Instantiate(EnjectedBalls[BallIndex], new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
                         MyTrailRenderer.startColor = MyColor;
-                        //  MeshFilter.gameObject.transform.position = new Vector3(MeshFilter.gameObject.transform.position.x, MeshFilter.gameObject.transform.position.y - 0.1f, MeshFilter.gameObject.transform.position.z);
-                       // MeshRenderer.material = BallMaterial[BallIndex];
                         MeshFilter.mesh = BallMeshes[BallIndex];
                         StartCoroutine(ReduceScaleAnimation());
                         break;

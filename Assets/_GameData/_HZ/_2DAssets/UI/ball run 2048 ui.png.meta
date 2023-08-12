@@ -1,0 +1,1191 @@
+fileFormatVersion: 2
+guid: dd04318db2c0e514baa7eb16a9464d1d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 1
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 100
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ad button 2 .png
+      rect:
+        serializedVersion: 2
+        x: 1867
+        y: 1228
+        width: 140
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 306a8ee8332f56b46bb6eae851297eab
+      internalID: 1429770655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ad icon .png
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 568
+        width: 328
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 751b8c2e18ea4d1419171869aee51584
+      internalID: 823671357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ad tv .png
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 15
+        width: 279
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec7810ddd85fd994d931799273edc8a8
+      internalID: 1434330125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ad tv 2 .png
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 1085
+        width: 391
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f7af0b5f5c7a734f88bd10e6140744f
+      internalID: -1227592278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow .png
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 446
+        width: 78
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 336f618279e8b3c4fb00a97d0ff351db
+      internalID: -1914464957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball card .png
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 65
+        width: 195
+        height: 263
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 397681cc0616bed4f9e4ab5fc6f408f1
+      internalID: 878952776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bu  icon 2.png
+      rect:
+        serializedVersion: 2
+        x: 1865
+        y: 866
+        width: 102
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6da7a807db95f0b4c9927cea88cda17a
+      internalID: -1674624681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button 2g  .png
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 416
+        width: 419
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfb72648f4f688d4d94a27e12a261caf
+      internalID: -376031280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chest box .png
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 785
+        width: 357
+        height: 296
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b53a9b51032868449b47f1fe65964252
+      internalID: 1297538244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin 2 .png
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 455
+        width: 79
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b51c07c4e599e342a3a24587b80d469
+      internalID: -1591903853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin bar .png
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 341
+        width: 191
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91514b82c2a82ab408aa53d4e62a4f08
+      internalID: 1886416959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: collect text .png
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 542
+        width: 215
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd19a5da4df637740805325fabe534df
+      internalID: 209636303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dont like text .png
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 349
+        width: 399
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f94ab51270c9be34ba7f30803d5af62b
+      internalID: -350664400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emt ball .png
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 609
+        width: 259
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f17962cd546b3b4c9f7a696fb45c88b
+      internalID: -1190810080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emt bar .png
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 512
+        width: 315
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c130d7f81d813cb498aa21f54c4b2ede
+      internalID: -1576371052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fill ball .png
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 1253
+        width: 245
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1286c91a4c8ab33428a8a3aa1c52ef6b
+      internalID: 439372458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fill bar .png
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 18
+        width: 306
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17e866027d6598e4cad060cc38255c85
+      internalID: -1892792715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: get more earning text .png
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 1283
+        width: 394
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a08d19324dd7d2f4c871dbf11a64ad70
+      internalID: 1692279563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hader .png
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 569
+        width: 447
+        height: 298
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 177cf649ba1b54043a80dc95713e0df1
+      internalID: -2122079602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hand .png
+      rect:
+        serializedVersion: 2
+        x: 1932
+        y: 1492
+        width: 110
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a6ffe14f3fd1d944bf7e01bfb661054
+      internalID: -144416096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hold and tex.png
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 693
+        width: 338
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f52591f46a50fce4cb82730cf42b5d9d
+      internalID: 1971455014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon 2 .png
+      rect:
+        serializedVersion: 2
+        x: 1865
+        y: 1079
+        width: 124
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4516f340348336a4f942caefafa7165e
+      internalID: -1685816178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading emt .png
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 1579
+        width: 548
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11925d211189fd94d940b504b8d53ed1
+      internalID: 1588856134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading fill .png
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 11
+        width: 354
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ac51a7848fdf84085c6e018b7786de
+      internalID: -1733662842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo 1 .png
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 1745
+        width: 643
+        height: 301
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f8554e91203f6343a6cd9268417acdc
+      internalID: -1446423694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magnet card .png
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 599
+        width: 195
+        height: 263
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68dc59c66e68cc9419dcac1f7fb9d435
+      internalID: 1245551026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: move Arrow .png
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 1521
+        width: 512
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25b6bc91bbccdaf41b17d0a82d92091e
+      internalID: 458997678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: No Thanks .png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 4
+        width: 196
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c37e25f4ef5e10d479d9b44b95779fd7
+      internalID: -1990768416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: off button .png
+      rect:
+        serializedVersion: 2
+        x: 1872
+        y: 1427
+        width: 152
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7142727df490f543897cc42284633e3
+      internalID: 2082394547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: on button .png
+      rect:
+        serializedVersion: 2
+        x: 1867
+        y: 1363
+        width: 152
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 513363773db138f499c9212eea8322c7
+      internalID: 1804299465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: open chest box .png
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 871
+        width: 481
+        height: 360
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e23284c2f75bc554ab4a621002248a40
+      internalID: -1980245821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pane 2 .png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1320
+        width: 685
+        height: 726
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78b20785129c1834b981dbebcbe42c2d
+      internalID: -319052119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rate us text .png
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 1110
+        width: 234
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c2ecdb5fd993ad439dd626dee6ce5b8
+      internalID: -556895149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rays 1.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 606
+        width: 710
+        height: 710
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e513186ba6ddd854fa2e216458fda299
+      internalID: 470531058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rays 2 .png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 45
+        width: 720
+        height: 557
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04e943627ca61db4aa29f13c282122ae
+      internalID: -1890302657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ribbon .png
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 1627
+        width: 606
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff4ae5cff7445ff4483443ddd70ae4f4
+      internalID: -1126232251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: satr 2 .png
+      rect:
+        serializedVersion: 2
+        x: 1865
+        y: 972
+        width: 108
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04b928d854a2ecf45afe3ec9a74688c0
+      internalID: 897736558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Setting .png
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 1174
+        width: 238
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c75d57ec04f88d4cb0ffd2a53c82542
+      internalID: 1451767165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Setting button .png
+      rect:
+        serializedVersion: 2
+        x: 1971
+        y: 894
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbf5300f012634f40a0a60a59f589d86
+      internalID: -994020568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: setting panel.png
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 1347
+        width: 685
+        height: 699
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a44796478520844cac3e414421dc27e
+      internalID: -466782341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Speed card .png
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 332
+        width: 195
+        height: 263
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f56077872b709f479befa537e396824
+      internalID: -2007755541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stage .png
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 1235
+        width: 483
+        height: 199
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd8ca632f49a9ad4da2fd2d4c663cc24
+      internalID: -482225419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: star 1 .png
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 890
+        width: 132
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d15d1c42aa6eb1a43b3204cec14bbcb3
+      internalID: 480863784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: star 3.png
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 910
+        width: 108
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3e84f49bbe5ccd49bffb03243f5d746
+      internalID: 1239885459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: star 3s .png
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 452
+        width: 89
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c6fa2e10d23d0948ae7501713aacb35
+      internalID: 439961270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: upgreat Arrow .png
+      rect:
+        serializedVersion: 2
+        x: 1990
+        y: 1692
+        width: 39
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a607b1f598db8942a68edfadb457a70
+      internalID: 553140642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: win .png
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 1018
+        width: 217
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a702168613224034bb4b510c7b315175
+      internalID: -1590492709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Xp bar.png
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 1438
+        width: 488
+        height: 79
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9964cfe881c86d4592be129685df5eb
+      internalID: 671274049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d508605df501ff943b38aa5354e75726
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Magnet card .png: 1245551026
+      satr 2 .png: 897736558
+      off button .png: 2082394547
+      Ribbon .png: -1126232251
+      star 3.png: 1239885459
+      ball card .png: 878952776
+      emt bar .png: -1576371052
+      fill bar .png: -1892792715
+      win .png: -1590492709
+      setting panel.png: -466782341
+      Chest box .png: 1297538244
+      No Thanks .png: -1990768416
+      Button 2g  .png: -376031280
+      rays 2 .png: -1890302657
+      Logo 1 .png: -1446423694
+      coin 2 .png: -1591903853
+      hand .png: -144416096
+      fill ball .png: 439372458
+      ad icon .png: 823671357
+      get more earning text .png: 1692279563
+      dont like text .png: -350664400
+      pane 2 .png: -319052119
+      rays 1.png: 470531058
+      Setting .png: 1451767165
+      coin bar .png: 1886416959
+      ad tv .png: 1434330125
+      hader .png: -2122079602
+      Setting button .png: -994020568
+      ad button 2 .png: 1429770655
+      open chest box .png: -1980245821
+      star 1 .png: 480863784
+      Speed card .png: -2007755541
+      move Arrow .png: 458997678
+      hold and tex.png: 1971455014
+      stage .png: -482225419
+      Rate us text .png: -556895149
+      upgreat Arrow .png: 553140642
+      star 3s .png: 439961270
+      Arrow .png: -1914464957
+      icon 2 .png: -1685816178
+      bu  icon 2.png: -1674624681
+      Xp bar.png: 671274049
+      emt ball .png: -1190810080
+      ad tv 2 .png: -1227592278
+      loading fill .png: -1733662842
+      on button .png: 1804299465
+      collect text .png: 209636303
+      loading emt .png: 1588856134
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -32,6 +32,7 @@ public class GlassBroker : MonoBehaviour
         if (other.CompareTag("Ball"))
         {
             SpawnBalls();
+            finishLineController.GlassAudioSource.PlayOneShot(finishLineController.StairSound);
         }
     }
 

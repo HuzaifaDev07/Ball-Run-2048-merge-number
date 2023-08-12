@@ -15,6 +15,9 @@ TagManager:
   - Failed
   - Glass
   - AutoControl
+  - 2x
+  - 4x
+  - 8x
   layers:
   - Default
   - TransparentFX
