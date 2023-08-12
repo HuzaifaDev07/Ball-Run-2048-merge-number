@@ -1,57 +1,59 @@
 using UnityEngine;
 using TMPro;
-
-public class PlayerController : MonoBehaviour
+namespace Huzaifa
 {
-    [SerializeField] float maxXLimit = 4;
-    public int score;
-    public TextMeshPro scoreText;
-    private Animator playerAnim;
-    public float speed;
-    [SerializeField] Rigidbody rb;
-    public float forceLimit;
-    public Vector3 direction = Vector3.forward;
-    public int Score
+    public class PlayerController : MonoBehaviour
     {
-        get { return score; }
-    }
-
-    //void Start()
-    //{
-    //    playerAnim = GetComponent<Animator>();
-    //    rb = GetComponent<Rigidbody>();
-    //}
-
-    private void FixedUpdate()
-    {
-        // Calculate the force to apply
-        Vector3 force = direction.normalized * speed;
-
-        // Limit the force to the specified force limit
-        if (force.magnitude > forceLimit)
+        [SerializeField] float maxXLimit = 4;
+        public int score;
+        public TextMeshPro scoreText;
+        private Animator playerAnim;
+        public float speed;
+        [SerializeField] Rigidbody rb;
+        public float forceLimit;
+        public Vector3 direction = Vector3.forward;
+        public int Score
         {
-            force = force.normalized * forceLimit;
+            get { return score; }
         }
 
-        // Apply the force
-        rb.AddForce(force, ForceMode.Impulse);
-        XBounds();
-    }
-  
-    public void ScoreStatus()
-    {
-        scoreText.text = score.ToString();
-    }
+        //void Start()
+        //{
+        //    playerAnim = GetComponent<Animator>();
+        //    rb = GetComponent<Rigidbody>();
+        //}
 
-    void XBounds()
-    {
-        if (transform.position.x > maxXLimit)
+        private void FixedUpdate()
         {
-            transform.position = new Vector3(maxXLimit, transform.position.y, transform.position.z);
+            // Calculate the force to apply
+            Vector3 force = direction.normalized * speed;
+
+            // Limit the force to the specified force limit
+            if (force.magnitude > forceLimit)
+            {
+                force = force.normalized * forceLimit;
+            }
+
+            // Apply the force
+            rb.AddForce(force, ForceMode.Impulse);
+            XBounds();
         }
-        if (transform.position.x < -maxXLimit)
+
+        public void ScoreStatus()
         {
-            transform.position = new Vector3(-maxXLimit, transform.position.y, transform.position.z);
+            scoreText.text = score.ToString();
+        }
+
+        void XBounds()
+        {
+            if (transform.position.x > maxXLimit)
+            {
+                transform.position = new Vector3(maxXLimit, transform.position.y, transform.position.z);
+            }
+            if (transform.position.x < -maxXLimit)
+            {
+                transform.position = new Vector3(-maxXLimit, transform.position.y, transform.position.z);
+            }
         }
     }
 
