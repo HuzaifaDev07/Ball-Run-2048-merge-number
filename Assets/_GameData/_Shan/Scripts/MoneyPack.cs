@@ -136,15 +136,15 @@ namespace ArcadeIdle.Shan
                 GameObject obj = notePrefabList[notePrefabList.Count - 1];
                 notePrefabList.Remove(obj);
                 Destroy(obj);
-                totalResources = totalResources > 0 ? totalResources-- : 0;
-                yield return new WaitForSeconds(0.075f);
+                //totalResources = totalResources > 0 ? totalResources-- : 0;
+                yield return new WaitForSeconds(0.05f);
             }
             yield return null;
         }
 
         private IEnumerator AddCash()
         {
-            int revenue = notePrefabList.Count * 32;
+            int revenue = notePrefabList.Count;
             var playerPicker = player.GetComponent<PlayerPicker>();
             _endPoint = playerPicker.AnimationEndPoint();
             while (notePrefabList.Count > 0)
@@ -154,14 +154,13 @@ namespace ArcadeIdle.Shan
 
                 });
                 //StartCoroutine(pickDropAnimation.AnimateParabola(note, _startPoint, _endPoint, animationSpeed, animationHeight));
-                yield return new WaitForSeconds(0.075f);
+                yield return new WaitForSeconds(0.001f);
             }
             colNum = 0;
             rowNum = 0;
             totalResources = 0;
-            //SaveSystem.Instance.Data.GameStartPriceGiven = gameStartPriceGiven;
-            //ResourcesSystem.Instance.AddResourceCount(ResourcesSystem.ResourceType.Banknotes, revenue);
-            //SaveSystem.Instance.SaveData();
+            ResourcesSystem.Instance.AddResourceCount(ResourcesSystem.ResourceType.Banknotes, revenue);
+            SaveSystem.Instance.SaveData();
         }
 
         public void AnimateNotes(int numberOfNotes)

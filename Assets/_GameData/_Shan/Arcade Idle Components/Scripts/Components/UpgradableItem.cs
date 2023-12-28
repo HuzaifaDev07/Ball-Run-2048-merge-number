@@ -13,13 +13,29 @@ namespace ArcadeIdle
             Add,
         }
 
-        [BoxGroup("BUTTON BUY")] [SerializeField] [Required("Drag and drop button buy here.")]
-        private ButtonBuy _buttonBuy;
+        //[BoxGroup("BUTTON BUY")] [SerializeField] [Required("Drag and drop button buy here.")]
+        //private ButtonBuy _buttonBuy;
         [BoxGroup("BUTTON BUY")] [SerializeField]
         private bool _usePriceText;
         [BoxGroup("BUTTON BUY")] [ShowIf("_usePriceText")] [SerializeField] 
         private string _buttonTextAfterMaxUpgrade;
-        
+
+        [BoxGroup("PLACEMENT")]
+        [SerializeField]
+        private bool _usePlacement;
+        [BoxGroup("PLACEMENT")]
+        [ShowIf("_usePlacement")]
+        [SerializeField]
+        private Placement _placement;
+        [BoxGroup("PLACEMENT")]
+        [ShowIf("_usePlacement")]
+        [SerializeField]
+        private bool _hidePlacementAfterUnlock;
+
+        [BoxGroup("PLACEMENT REWARDED")]
+        [SerializeField]
+        private bool _useRewarded;
+
         [BoxGroup("PROGRESS BAR")] [SerializeField]
         private bool _useProgressBar;
         [BoxGroup("PROGRESS BAR")] [ShowIf("_useProgressBar")] [SerializeField] [Required("Drag and drop progress bar with items here.")]
@@ -56,7 +72,9 @@ namespace ArcadeIdle
 
         private void Start()
         {
-            _buttonBuy.Button.onClick.AddListener(TryToUpgradeItem);
+            _placement.UseRewarded = _useRewarded;
+            _placement.OnEnterPlacement.AddListener(OnUpgrade);
+            //_buttonBuy.Button.onClick.AddListener(TryToUpgradeItem);
             CheckForErrors();
             CalculatePrice();
             UpdateState();
@@ -66,10 +84,10 @@ namespace ArcadeIdle
         {
             if (Resources.Load<Settings>(Constants.SETTINGS).ShowWarnings)
             {
-                if (_buttonBuy == null)
+                /*if (_buttonBuy == null)
                 {
                     Debug.LogError("Unlockable Item: button buy is null.");
-                }
+                }*/
                 
                 if (_useProgressBar && _progressBar == null)
                 {
@@ -94,21 +112,22 @@ namespace ArcadeIdle
 
         private void UpdateState()
         {
-            _progressBar.SetProgress(UpgradeLevel);
+            //_progressBar.SetProgress(UpgradeLevel);
 
             if (UpgradeLevel == _maxUpgradeLevel)
             {
+                gameObject.SetActive(false);
                 if (_usePriceText)
                 {
-                    _buttonBuy.HideIcon();
-                    _buttonBuy.SetText(_buttonTextAfterMaxUpgrade);
+                    //_buttonBuy.HideIcon();
+                    //_buttonBuy.SetText(_buttonTextAfterMaxUpgrade);
                 }
             }
             else
             {
                 if (_usePriceText)
                 {
-                    _buttonBuy.SetText(_currentPrice.ToString());
+                   // _buttonBuy.SetText(_currentPrice.ToString());
                 }
             }
         }
@@ -130,6 +149,19 @@ namespace ArcadeIdle
             OnUpgradeItem?.Invoke(data.UpgradeLevel);
             CalculatePrice();
             UpdateState();
+        }
+        private void OnUpgrade(GameObject gameObject)
+        {
+            var data = SaveSystem.Instance.Data.UpgradableItemsData.Find(item => item.Id == _id);
+            data.UpgradeLevel++;
+            SaveSystem.Instance.SaveData();
+
+            UpgradeLevel = data.UpgradeLevel;
+
+            OnUpgradeItem?.Invoke(data.UpgradeLevel);
+            CalculatePrice();
+            UpdateState();
+            _placement.ResetProgressBar();
         }
 
         private void CalculatePrice()

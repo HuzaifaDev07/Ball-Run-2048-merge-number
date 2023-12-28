@@ -28,7 +28,7 @@ namespace ArcadeIdle.Shan
             if (!given)
             {
                 SaveSystem.Instance.Data.GameStartPriceGiven = true;
-                ResourcesSystem.Instance.AddResourceCount(ResourcesSystem.ResourceType.Banknotes, 300);
+                ResourcesSystem.Instance.AddResourceCount(ResourcesSystem.ResourceType.Banknotes, 200);
                 SaveSystem.Instance.SaveData();
             }
         }

@@ -14,6 +14,9 @@ namespace ArcadeIdle
         private Placement _placement;
         [BoxGroup("PLACEMENT")] [ShowIf("_usePlacement")] [SerializeField] 
         private bool _hidePlacementAfterUnlock;
+
+        [BoxGroup("PLACEMENT REWARDED")] [SerializeField]
+        private bool _useRewarded;
         
         [BoxGroup("BUTTON BUY")] [SerializeField]
         private bool _useButtonBuy;
@@ -55,6 +58,7 @@ namespace ArcadeIdle
 
         private void Awake()
         {
+            _placement.UseRewarded = _useRewarded;
             _placement.MoneyAdded += DecreasePrice;
             _placement.RequiredResources = _price;
         }
@@ -93,9 +97,13 @@ namespace ArcadeIdle
                 _buttonBuy.Button.onClick.AddListener(TryToUnlockItem);
             }
 
-            if (_usePlacement)
+            if (_usePlacement && !_useRewarded)
             {
                 _placement.OnEnterPlacement.AddListener(TryToUnlockItem);
+            }
+            else if (_useRewarded)
+            {
+                _placement.OnEnterPlacement.AddListener(OnUnlock);
             }
         }
         private void DecreasePrice(int price)
@@ -142,8 +150,8 @@ namespace ArcadeIdle
                 {
                     _buttonBuy.SetText(_price.ToString());
                 }
-                
-                if (_usePriceText)
+
+                if (_usePriceText && !_useRewarded)
                 {
                     _text.text = _price.ToString();
                 }
@@ -163,6 +171,16 @@ namespace ArcadeIdle
         }
 
         private void OnUnlock()
+        {
+            var data = SaveSystem.Instance.Data.UnlockableItemsData.Find(item => item.Id == _id);
+            data.IsUnlocked = true;
+            SaveSystem.Instance.SaveData();
+
+            IsUnlocked = true;
+            OnUnlockItem?.Invoke();
+            UpdateState();
+        }
+        private void OnUnlock(GameObject gameObject)
         {
             var data = SaveSystem.Instance.Data.UnlockableItemsData.Find(item => item.Id == _id);
             data.IsUnlocked = true;

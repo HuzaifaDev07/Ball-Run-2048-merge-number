@@ -131,7 +131,7 @@ namespace ArcadeIdle
             }
             else
             {
-                _text.text = _isHealthBar ? string.Format(_textFormat, (int) value, (int) maxValue) : string.Format(_textFormat, (int) value);
+                _text.text = (maxValue - value).ToString(); /*_isHealthBar ? string.Format(_textFormat, (int) value, (int) maxValue) : string.Format(_textFormat, (int) value)*/;
             }
         }
 

@@ -17,7 +17,8 @@ namespace ArcadeIdle.Shan
             {
                 meshRenderer.material.mainTexture = _newTexture;
             }
-            objectRendererSecond.materials[1].mainTexture = _newTexture;
+            if(objectRendererSecond)
+                objectRendererSecond.materials[1].mainTexture = _newTexture;
         }
     }
 }

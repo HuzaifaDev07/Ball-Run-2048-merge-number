@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/_GameData/_Shan/Scenes/BallMakingScene.unity
+    guid: 942aacd456a627e4d9c8f33272faef9a
   m_configObjects: {}

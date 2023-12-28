@@ -18,9 +18,9 @@ namespace ArcadeIdle
         public bool AddBallsToMachine = false;
         public bool AddPackagesToGateway = false;
 
-        public bool ThrowTrashTextShown = false;
-        public bool SaleBurgerTextShown = false;
-        public bool BurgerSale = false;
+        public bool CricketBallMachineShown = false;
+        public bool FootBallMachineShown = false;
+        public bool BasketBallMachineShown = false;
         
 
         public int[] ResourcesCounts;

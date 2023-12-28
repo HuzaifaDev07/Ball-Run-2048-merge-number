@@ -4,6 +4,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
+using ArcadeIdle.Shan;
 
 namespace ArcadeIdle
 {
@@ -34,6 +35,9 @@ namespace ArcadeIdle
         [BoxGroup("PROGRESS BAR")]
         [SerializeField]
         private bool _toStoreValue;
+        [BoxGroup("HIDE PATH")]
+        [SerializeField]
+        private bool _toHideNavmesh;
 
         [BoxGroup("PROGRESS BAR")]
         [ShowIf("_toStoreValue")]
@@ -49,6 +53,7 @@ namespace ArcadeIdle
 
         private Transform startPoint;
 
+        private bool _useRewarded;
 
         int currentResources;
         int resourcesInHand;
@@ -57,6 +62,11 @@ namespace ArcadeIdle
         {
             get => requiredResources;
             set => requiredResources = value;
+        }
+        public bool UseRewarded
+        {
+            get => _useRewarded;
+            set => _useRewarded = value;
         }
         private void Awake()
         {
@@ -88,7 +98,7 @@ namespace ArcadeIdle
 
         private void CheckForPreviousValue()
         {
-            if (PlayerPrefs.HasKey(_saveProgress))
+            if (PlayerPrefs.HasKey(_saveProgress) && !_useRewarded)
             {
                 var value = PlayerPrefs.GetInt(_saveProgress);
                 if (_useProgressBar)
@@ -116,23 +126,37 @@ namespace ArcadeIdle
         {
             var name = gameObject.name;
             if (IsShowed == false) return;
-
-            startPoint = player.GetComponent<PlayerAnimations>().AnimationEndPoint();
-            if (_useDelay)
+            if (_useRewarded)
             {
-                currentResources = ResourcesSystem.Instance.GetResourceCount(ResourcesSystem.ResourceType.Banknotes);
-                if (currentResources > 0)
+                StartCoroutine(WaitDelayForRewarded(() =>
                 {
-                    StartCoroutine(WaitDelay(() =>
-                    {
-                        OnEnterPlacement?.Invoke(player);
-                    }));
-                    StartCoroutine(AnimateNotes());
-                }
+                    OnEnterPlacement?.Invoke(player);
+                }));
             }
             else
             {
-                OnEnterPlacement?.Invoke(player);
+                startPoint = player.GetComponent<PlayerAnimations>().AnimationEndPoint();
+                if (_useDelay)
+                {
+                    currentResources = ResourcesSystem.Instance.GetResourceCount(ResourcesSystem.ResourceType.Banknotes);
+                    if (currentResources > 0)
+                    {
+                        StartCoroutine(WaitDelay(() =>
+                        {
+                            OnEnterPlacement?.Invoke(player);
+                        }));
+                        StartCoroutine(AnimateNotes());
+                    }
+                }
+                else
+                {
+                    OnEnterPlacement?.Invoke(player);
+                }
+                if (_toHideNavmesh)
+                {
+                    _toHideNavmesh = false;
+                    PlayerController.Instance.DisableNavmeshDraw();
+                }
             }
         }
         
@@ -151,6 +175,18 @@ namespace ArcadeIdle
             
             OnExitPlacement?.Invoke(player);
         }
+        /// <summary>
+        /// Reset Values
+        /// </summary>
+        /// <param name="onComplete"></param>
+        /// <returns></returns>
+        /// 
+
+        public void ResetProgressBar()
+        {
+            _progressBar.ResetValues();
+        }
+
 
         private IEnumerator WaitDelay(Action onComplete)
         {
@@ -206,6 +242,28 @@ namespace ArcadeIdle
             {
                 MoneyAddedToUnlock(currResources);
             }
+        }
+        private IEnumerator WaitDelayForRewarded(Action onComplete)
+        {
+            float increaseVal = 0;
+            float maxeVal = 16;
+            while (increaseVal < maxeVal)
+            {
+                increaseVal += 2;
+                if (_useProgressBar)
+                {
+                    _progressBar.SetProgress(increaseVal , maxeVal);
+                }
+                if (increaseVal >= maxeVal)
+                {
+                    onComplete?.Invoke();
+                    break; // Exit the loop since unlocking is complete
+                }
+                yield return new WaitForSeconds(0.075f);
+            }
+            yield return new WaitForSeconds(0.15f);
+            if (increaseVal >= maxeVal)
+                onComplete?.Invoke();
         }
         private void MoneyAddedToUnlock(int price)
         {
@@ -278,7 +336,7 @@ namespace ArcadeIdle
         /// </summary>
         private void OnApplicationQuit()
         {
-            if(_toStoreValue)
+            if(_toStoreValue && !_useRewarded)
                 PlayerPrefs.SetInt(_saveProgress, resourcesInHand);
         }
 

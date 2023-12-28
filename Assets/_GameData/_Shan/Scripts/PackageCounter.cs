@@ -8,6 +8,7 @@ namespace ArcadeIdle.Shan
     public class PackageCounter : MonoBehaviour
     {
         [BoxGroup("Basket")] [SerializeField] GameObject _filledBasketPrefab;
+        [BoxGroup("Basket")] [SerializeField] GameObject _filledBasketPrefabToAnimate;
         [BoxGroup("Basket")] [SerializeField] Transform[] _packagePlacePoints;
         [BoxGroup("Use Event")] [SerializeField] PackageMaker _packageMaker;
 
@@ -84,7 +85,7 @@ namespace ArcadeIdle.Shan
                 AnimationState _animationState = AnimationState.Running;
                 playerPicker.HideMaxText();
                 _spawnedPackage[SpawnPackageCount - 1].SetActive(false);
-                var package = Instantiate(_filledBasketPrefab, this.transform).transform;
+                var package = Instantiate(_filledBasketPrefabToAnimate, this.transform).transform;
 
                 _Animation.ParabolicAnimation(package, transform, playerPicker.AnimationEndPoint(), () => {
 

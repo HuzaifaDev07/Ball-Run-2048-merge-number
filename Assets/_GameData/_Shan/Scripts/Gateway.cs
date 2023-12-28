@@ -27,6 +27,10 @@ namespace ArcadeIdle.Shan
         private AnimationType _itemType;
         private AnimationState _animationState;
         [BoxGroup("Next Target")] [SerializeField] Transform _nextTarget;
+
+        [BoxGroup("Machines")] [SerializeField] GameObject _cricketBallMachine;
+        [BoxGroup("Machines")] [SerializeField] GameObject _footBallMachine;
+        [BoxGroup("Machines")] [SerializeField] GameObject _basketBallMachine;
         //Private Data Fields
 
         private AnimateBalls _Animation;
@@ -37,10 +41,12 @@ namespace ArcadeIdle.Shan
 
         private int playerCapacity;
 
-        private int spawnNotes = 8;
+        private int spawnNotes = 4;
 
         private bool _fillingStock = false;
         private bool _salingStock = false;
+
+
 
         #endregion ____________Use_On_Player_Enter____________
 
@@ -61,7 +67,11 @@ namespace ArcadeIdle.Shan
         private readonly List<GameObject> _spawnedPackages = new List<GameObject>();
 
         // Change  CustomersToDeal customersToDeal;
-        private Cashier cashier;
+        //private Cashier cashier;
+
+        private int orderCount = 0;
+
+        private bool allUnlock;
 
         public int SpawnPackageCount
         {
@@ -86,6 +96,17 @@ namespace ArcadeIdle.Shan
         {
             SubscribeEvents();
 
+            bool cricket = SaveSystem.Instance.Data.CricketBallMachineShown;
+            bool football = SaveSystem.Instance.Data.FootBallMachineShown;
+            bool basketball = SaveSystem.Instance.Data.BasketBallMachineShown;
+
+            if (cricket)
+                _cricketBallMachine.SetActive(true);
+            if (football)
+                _footBallMachine.SetActive(true);
+            if (basketball)
+                _basketBallMachine.SetActive(true);
+            allUnlock = (cricket && football && basketball);
         }
 
         private void SubscribeEvents()
@@ -139,7 +160,8 @@ namespace ArcadeIdle.Shan
         private void ManagePackagesByPlayer()
         {
             SpecialBackpack playerBackpack = player.GetComponent<PlayerPicker>()._specialBackpack;
-            if (playerBackpack.ItemsCount > 0 && playerBackpack.ShowedItemsType == _packagePrefab.GetComponent<Fruit>().resourceType)
+            SpecialBackpack _specialBackpackForBalls = player.GetComponent<PlayerPicker>()._specialBackpackForBalls;
+            if (playerBackpack.ItemsCount > 0 && _specialBackpackForBalls.ItemsCount <= 0 && playerBackpack.ShowedItemsType == _packagePrefab.GetComponent<Fruit>().resourceType)
             {
                 StartCoroutine(AddPackagesToCounterByPlayer());
                 bool gatewayCounter = SaveSystem.Instance.Data.AddPackagesToGateway;
@@ -148,6 +170,7 @@ namespace ArcadeIdle.Shan
                     SaveSystem.Instance.Data.AddPackagesToGateway = true;
                     PlayerController.Instance.DisableNavmeshDraw();
                     SaveSystem.Instance.SaveData();
+                    RewardedAdScenario.Instance.CallRewardedAdFunction();
                 }
             }
         }
@@ -226,7 +249,7 @@ namespace ArcadeIdle.Shan
                     var package = Instantiate(_packagePrefabToAnimate, this.transform).transform;
                     _spawnedPackages[SpawnPackageCount - 1].SetActive(false);
 
-                    _Animation.ParabolicAnimation(package, _packageSpawnPoints[_spawnedPackages.Count], vehicleBackpack.transform, () => {
+                    _Animation.ParabolicAnimation(package, _packageSpawnPoints[_spawnedPackages.Count - 1], vehicleBackpack.transform, () => {
 
                         vehicle.PurchaseItem(_spawnedPackages[SpawnPackageCount - 1]);
                         OnSale(_spawnedPackages[SpawnPackageCount - 1]);
@@ -247,8 +270,39 @@ namespace ArcadeIdle.Shan
 
             if(_moneyPackAvailable)
                 moneyPack.AnimateNotes(spawnNotes);
+            if(!allUnlock)
+                ShowNewVehiclePoint();
         }
+        private void ShowNewVehiclePoint()
+        {
+            orderCount++;
 
+            bool cricket = SaveSystem.Instance.Data.CricketBallMachineShown;
+            bool football = SaveSystem.Instance.Data.FootBallMachineShown;
+            bool basketball = SaveSystem.Instance.Data.BasketBallMachineShown;
+
+            if (orderCount >= 5 && !cricket)
+            {
+                SaveSystem.Instance.Data.CricketBallMachineShown = true;
+                PlayerController.Instance.ShowNextTargetNavmesh(_cricketBallMachine.transform);
+                _cricketBallMachine.SetActive(true);
+            }
+            else if (orderCount >= 10 && !football)
+            {
+                SaveSystem.Instance.Data.FootBallMachineShown = true;
+                PlayerController.Instance.ShowNextTargetNavmesh(_footBallMachine.transform);
+                _footBallMachine.SetActive(true);
+            }
+            else if (orderCount >= 15 && !basketball)
+            {
+                SaveSystem.Instance.Data.BasketBallMachineShown = true;
+                PlayerController.Instance.ShowNextTargetNavmesh(_basketBallMachine.transform);
+                _basketBallMachine.SetActive(true);
+            }
+            SaveSystem.Instance.SaveData();
+
+            allUnlock = (cricket && football && basketball);
+        }
         private void OnSale(GameObject package)
         {
             if (package != null)

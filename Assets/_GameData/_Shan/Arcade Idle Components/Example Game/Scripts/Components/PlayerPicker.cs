@@ -21,6 +21,10 @@ namespace ArcadeIdle
         [SerializeField]
         CanvasGroup _MaxText;
 
+        [BoxGroup("UPGRADABLE ITEMS")]
+        [SerializeField]
+        private UpgradableItem _capacityUpgradable;
+
         private PlayerAnimations _playerAnimations;
         private int colorPaclCount;
 
@@ -33,6 +37,7 @@ namespace ArcadeIdle
         private void Start()
         {
             _playerAnimations = GetComponent<PlayerAnimations>();
+            _capacityUpgradable.OnUpgradeItem.AddListener(OnUpgradePlayerCapacity);
         }
 
         public void TryPickUp(GameObject go)
@@ -71,7 +76,9 @@ namespace ArcadeIdle
         }
         public int PlayerCapacityCount()
         {
-            return 2;
+            int playerCapacityLevel = SaveSystem.Instance.Data.PlayerCapacityLevel;
+
+            return _playerCapacity[playerCapacityLevel];
         }
         public void PlayerAnimatorUpdate(bool val)
         {
@@ -94,6 +101,9 @@ namespace ArcadeIdle
         }*/
         private void OnUpgradePlayerCapacity(int capacityLevel)
         {
+            //_capacityUpgradable.PriceLevel = priceLevel;
+            SaveSystem.Instance.Data.PlayerCapacityLevel = capacityLevel;
+            SaveSystem.Instance.SaveData();
         }
 
         #region _____Max_Text_Canvas_Group______
